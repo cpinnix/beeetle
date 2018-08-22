@@ -1,0 +1,10 @@
+# Dependencies
+node_modules
+
+# System Files
+.DS_Store
+
+# Generated Files
+dist
+.cache
+yarn-error.log
