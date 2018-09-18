@@ -14,39 +14,49 @@ export const component = base => {
       };
 
       if (this.state.name && base.setName) {
-        base.setName(base)(this.state, () => this.state.name);
+        this.state = base.setName(base)(this.state)(() => this.state.name);
       }
 
       if (base.setProps) {
-        base.setProps(base)(this.state, () => this.state.props);
+        this.state = base.setProps(base)(this.state)(() => this.state.props);
 
         Object.defineProperty(this, "props", {
-          get: () => base.getProps(base)(this.state),
-          set: fn => base.setProps(base)(this.state, fn)
+          get: () => this.state.props,
+          set: fn => {
+            this.state = base.setProps(base)(this.state)(fn);
+          }
         });
       }
 
       if (base.setActions) {
-        base.setActions(base)(this.state, () => this.state.actions);
+        this.state = base.setActions(base)(this.state)(
+          () => this.state.actions
+        );
 
         Object.defineProperty(this, "actions", {
-          get: () => base.getActions(base)(this.state),
-          set: fn => base.setActions(base)(this.state, fn)
+          get: () => this.state.actions,
+          set: fn => {
+            this.state = base.setActions(base)(this.state)(fn);
+          }
         });
       }
 
       if (this.state.i18n && base.setI18n) {
-        base.setI18n(base)(this.state, () => this.state.i18n);
+        this.state = base.setI18n(base)(this.state)(() => this.state.i18n);
 
         Object.defineProperty(this, "i18n", {
-          get: () => base.getI18n(base)(this.state),
-          set: fn => base.setI18n(base)(this.state, fn)
+          get: () => this.state.i18n,
+          set: fn => {
+            this.state = base.setI18n(base)(this.state)(fn);
+          }
         });
       }
     }
 
     connectedCallback() {
-      base.setElement && base.setElement(base)(this.state, this);
+      if (base.setElement) {
+        this.state = base.setElement(base)(this.state)(this);
+      }
       base.mount && base.mount(base)(this.state);
     }
 

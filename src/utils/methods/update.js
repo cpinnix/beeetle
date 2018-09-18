@@ -14,10 +14,9 @@ const applyAsAttributes = (element, attributes) =>
 export const update = _ => ({
   ..._,
   update: base => state => {
-    const element = base.getElement(base)(state);
-    if (element) {
+    if (state.element) {
       base.render(base)(state);
-      if (state.attrs) applyAsAttributes(element, state.attrs);
+      if (state.attrs) applyAsAttributes(state.element, state.attrs);
     }
   }
 });

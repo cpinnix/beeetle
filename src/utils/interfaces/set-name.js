@@ -1,8 +1,15 @@
 export const setName = _ => ({
   ..._,
-  setName: base => (state, name) => {
+  setName: base => state => name => {
     const { didUpdateName } = base;
-    state.name = name();
-    if (didUpdateName) didUpdateName(state);
+
+    const newState = {
+      ...state,
+      name: name()
+    };
+
+    if (didUpdateName) didUpdateName(newState);
+
+    return newState;
   }
 });
