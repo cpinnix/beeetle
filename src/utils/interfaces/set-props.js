@@ -1,10 +1,12 @@
 export const setProps = _ => ({
   ..._,
   setProps: base => (state, fn) => {
-    const newProps = fn(state.props);
-    if (base.propsValidator) base.propsValidator(newProps);
     const oldProps = state.props;
+    const newProps = fn(state.props);
+
     state.props = newProps;
+
+    if (base.propsValidator) base.propsValidator(state);
 
     if (base.hooks) {
       const { shouldUpdate } = base.hooks;
