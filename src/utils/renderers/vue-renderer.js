@@ -6,7 +6,6 @@ export const vue = fn => _ => ({
     new Vue({
       el: state.element,
       data: state,
-      methods: state.actions,
       render: fn(state)
     });
   }
