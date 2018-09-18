@@ -6,11 +6,11 @@ export const component = base => {
       super();
 
       this.state = {
-        name: base.name ? base.name() : null,
-        props: base.props ? base.props() : null,
-        attrs: base.attrs ? base.attrs() : null,
-        i18n: base.i18n ? base.i18n() : null,
-        actions: base.actions ? base.actions() : null
+        name: base.name,
+        props: base.defaultProps,
+        attrs: base.defaultAttrs,
+        i18n: base.defaultI18n,
+        actions: base.defaultActions
       };
 
       if (this.state.name && base.setName) {
@@ -65,5 +65,5 @@ export const component = base => {
     }
   }
 
-  customElements.define(base.name(), Base);
+  customElements.define(base.name, Base);
 };

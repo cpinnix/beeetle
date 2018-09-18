@@ -1,4 +1,4 @@
-export const props = props => _ => ({
+export const props = defaultProps => _ => ({
   ..._,
-  props: () => props
+  defaultProps
 });

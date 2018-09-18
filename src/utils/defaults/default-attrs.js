@@ -1,4 +1,4 @@
-export const attrs = attrs => _ => ({
+export const attrs = defaultAttrs => _ => ({
   ..._,
-  attrs: () => attrs
+  defaultAttrs
 });

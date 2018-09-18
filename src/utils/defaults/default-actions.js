@@ -1,4 +1,4 @@
-export const actions = actions => _ => ({
+export const actions = defaultActions => _ => ({
   ..._,
-  actions: () => actions
+  defaultActions
 });
