@@ -13,49 +13,49 @@ export const component = base => {
         actions: base.defaultActions
       };
 
-      if (this.state.name && base.setName) {
-        this.state = base.setName(base)(this.state)(() => this.state.name);
+      if (this.state.name && base.updateName) {
+        this.state = base.updateName(base)(this.state)(() => this.state.name);
       }
 
-      if (base.setProps) {
-        this.state = base.setProps(base)(this.state)(() => this.state.props);
+      if (base.updateProps) {
+        this.state = base.updateProps(base)(this.state)(() => this.state.props);
 
         Object.defineProperty(this, "props", {
           get: () => this.state.props,
           set: fn => {
-            this.state = base.setProps(base)(this.state)(fn);
+            this.state = base.updateProps(base)(this.state)(fn);
           }
         });
       }
 
-      if (base.setActions) {
-        this.state = base.setActions(base)(this.state)(
+      if (base.updateActions) {
+        this.state = base.updateActions(base)(this.state)(
           () => this.state.actions
         );
 
         Object.defineProperty(this, "actions", {
           get: () => this.state.actions,
           set: fn => {
-            this.state = base.setActions(base)(this.state)(fn);
+            this.state = base.updateActions(base)(this.state)(fn);
           }
         });
       }
 
-      if (this.state.i18n && base.setI18n) {
-        this.state = base.setI18n(base)(this.state)(() => this.state.i18n);
+      if (this.state.i18n && base.updateI18n) {
+        this.state = base.updateI18n(base)(this.state)(() => this.state.i18n);
 
         Object.defineProperty(this, "i18n", {
           get: () => this.state.i18n,
           set: fn => {
-            this.state = base.setI18n(base)(this.state)(fn);
+            this.state = base.updateI18n(base)(this.state)(fn);
           }
         });
       }
     }
 
     connectedCallback() {
-      if (base.setElement) {
-        this.state = base.setElement(base)(this.state)(this);
+      if (base.updateElement) {
+        this.state = base.updateElement(base)(this.state)(this);
       }
       base.mount && base.mount(base)(this.state);
     }

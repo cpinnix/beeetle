@@ -24,10 +24,10 @@ create(
     `
   ),
   hooks({
-    mount({ setProps }) {
+    mount({ updateProps }) {
       setInterval(
         () =>
-          setProps(props => ({
+          updateProps(props => ({
             ...props,
             time: getTime()
           })),

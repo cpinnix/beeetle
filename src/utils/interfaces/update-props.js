@@ -1,6 +1,6 @@
-export const setProps = _ => ({
+export const updateProps = _ => ({
   ..._,
-  setProps: base => state => fn => {
+  updateProps: base => state => fn => {
     const oldProps = state.props;
 
     const newState = {

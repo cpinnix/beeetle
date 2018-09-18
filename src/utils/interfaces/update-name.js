@@ -1,6 +1,6 @@
-export const setName = _ => ({
+export const updateName = _ => ({
   ..._,
-  setName: base => state => name => {
+  updateName: base => state => name => {
     const { didUpdateName } = base;
 
     const newState = {

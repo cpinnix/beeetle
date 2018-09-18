@@ -1,6 +1,6 @@
-export const setActions = _ => ({
+export const updateActions = _ => ({
   ..._,
-  setActions: base => state => fn => {
+  updateActions: base => state => fn => {
     let newState = {
       ...state,
       actions: fn(state.actions)

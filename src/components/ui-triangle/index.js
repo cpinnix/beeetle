@@ -43,9 +43,9 @@ create(
     });
   }),
   hooks({
-    mount: ({ setProps }) => {
+    mount: ({ updateProps }) => {
       const tick = () => {
-        setProps(props => {
+        updateProps(props => {
           const elapsed = new Date().getTime() - props.start;
           const newSeconds = Math.floor(elapsed / 1000);
           return {

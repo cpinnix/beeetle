@@ -1,6 +1,6 @@
-export const setAttrs = _ => ({
+export const updateAttrs = _ => ({
   ..._,
-  setAttrs: base => state => fn => {
+  updateAttrs: base => state => fn => {
     const newState = {
       ...state,
       attrs: fn(state.attrs)

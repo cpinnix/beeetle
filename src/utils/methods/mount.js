@@ -3,14 +3,14 @@ export const mount = _ => ({
   mount: base => state => {
     if (base.hooks && base.hooks.mount) {
       base.hooks.mount({
-        setProps: fn => {
-          state = base.setProps(base)(state)(fn);
+        updateProps: fn => {
+          state = base.updateProps(base)(state)(fn);
         },
-        setActions: fn => {
-          state = base.setActions(base)(state)(fn);
+        updateActions: fn => {
+          state = base.updateActions(base)(state)(fn);
         },
-        setAttributes: fn => {
-          state = base.setAttributes(base)(state)(fn);
+        updateAttributes: fn => {
+          state = base.updateAttributes(base)(state)(fn);
         }
       });
     }

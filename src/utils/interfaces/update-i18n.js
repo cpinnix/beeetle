@@ -1,6 +1,6 @@
-export const setI18n = _ => ({
+export const updateI18n = _ => ({
   ..._,
-  setI18n: base => state => fn => {
+  updateI18n: base => state => fn => {
     const { update, didUpdateI18n } = base;
 
     const newState = {
