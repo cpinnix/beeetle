@@ -1,5 +1,5 @@
 import create from "../create";
-import { hyper, name, i18n, attrs } from "../../utils";
+import { hyper, name, i18n, attrs, hooks } from "../../utils";
 import "../ui-time";
 import "../ui-text";
 
@@ -23,5 +23,8 @@ create(
         <ui-time></ui-time>
       </div>
     `
-  )
+  ),
+  hooks({
+    didUpdateI18n: ({ name, i18n }) => console.log(name, i18n)
+  })
 );

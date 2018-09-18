@@ -30,6 +30,15 @@ export const component = base => {
           set: fn => base.setActions(base)(this.state, fn)
         });
       }
+
+      if (base.setI18n) {
+        base.setI18n(base)(this.state, () => this.state.i18n);
+
+        Object.defineProperty(this, "i18n", {
+          get: () => base.getI18n(base)(this.state),
+          set: fn => base.setI18n(base)(this.state, fn)
+        });
+      }
     }
 
     connectedCallback() {
