@@ -13,6 +13,10 @@ export const component = base => {
         actions: base.actions ? base.actions() : null
       };
 
+      if (this.state.name && base.setName) {
+        base.setName(base)(this.state, () => this.state.name);
+      }
+
       if (base.setProps) {
         base.setProps(base)(this.state, () => this.state.props);
 
@@ -31,7 +35,7 @@ export const component = base => {
         });
       }
 
-      if (base.setI18n) {
+      if (this.state.i18n && base.setI18n) {
         base.setI18n(base)(this.state, () => this.state.i18n);
 
         Object.defineProperty(this, "i18n", {

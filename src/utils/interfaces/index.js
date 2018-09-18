@@ -8,3 +8,5 @@ export * from "./set-actions";
 export * from "./get-actions";
 export * from "./set-i18n";
 export * from "./get-i18n";
+export * from "./set-name";
+export * from "./get-name";
