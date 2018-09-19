@@ -18,10 +18,12 @@ const applyAsAttributes = (element, attributes) =>
 
 export const render = _ => ({
   ..._,
-  render: base => state =>
-    when(state.element, () => {
-      base.renderer(base)(state);
+  render: component =>
+    when(component.element, () => {
+      component.renderer(component);
 
-      when(state.attrs, () => applyAsAttributes(state.element, state.attrs));
+      when(component.attrs, () =>
+        applyAsAttributes(component.element, component.attrs)
+      );
     })
 });

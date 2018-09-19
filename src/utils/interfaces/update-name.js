@@ -2,14 +2,16 @@ import { when } from "../when";
 
 export const updateName = _ => ({
   ..._,
-  updateName: base => state => name => {
-    const newState = {
-      ...state,
-      name: name()
+  updateName: prevComponent => fn => {
+    const nextComponent = {
+      ...prevComponent,
+      name: fn()
     };
 
-    when(base.didUpdateName, () => base.didUpdateName(newState));
+    when(nextComponent.didUpdateName, () =>
+      nextComponent.didUpdateName(nextComponent)
+    );
 
-    return newState;
+    return nextComponent;
   }
 });

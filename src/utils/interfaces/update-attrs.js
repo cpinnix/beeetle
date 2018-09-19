@@ -1,13 +1,13 @@
 export const updateAttrs = _ => ({
   ..._,
-  updateAttrs: base => state => fn => {
-    const newState = {
-      ...state,
-      attrs: fn(state.attrs)
+  updateAttrs: prevComponent => fn => {
+    const nextComponent = {
+      ...prevComponent,
+      attrs: fn(prevComponent.attrs)
     };
 
-    base.render(base)(newState);
+    nextComponent.render(nextComponent);
 
-    return newState;
+    return nextComponent;
   }
 });

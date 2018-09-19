@@ -3,24 +3,27 @@ import { either } from "../either";
 
 export const updateProps = _ => ({
   ..._,
-  updateProps: base => state => fn => {
-    const oldProps = state.props;
+  updateProps: prevComponent => fn => {
+    const prevProps = prevComponent.props;
 
-    const newState = {
-      ...state,
-      props: fn(state.props)
+    const nextComponent = {
+      ...prevComponent,
+      props: fn(prevComponent.props)
     };
 
-    const newProps = newState.props;
+    const nextProps = nextComponent.props;
 
-    when(base.propsValidator, () => base.propsValidator(newState));
-
-    either(
-      base.shouldRender && !base.shouldRender(oldProps, newProps),
-      () => {},
-      () => base.render(base)(newState)
+    when(nextComponent.propsValidator, () =>
+      nextComponent.propsValidator(nextComponent)
     );
 
-    return newState;
+    either(
+      nextComponent.shouldRender &&
+        !nextComponent.shouldRender(prevProps, nextProps),
+      () => {},
+      () => nextComponent.render(nextComponent)
+    );
+
+    return nextComponent;
   }
 });

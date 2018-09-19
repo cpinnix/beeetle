@@ -1,4 +1,4 @@
 export const actionsValidator = fn => _ => ({
   ..._,
-  actionsValidator: state => fn(state)
+  actionsValidator: component => fn(component)
 });

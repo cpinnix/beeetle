@@ -2,18 +2,22 @@ import { when } from "../when";
 
 export const updateI18n = _ => ({
   ..._,
-  updateI18n: base => state => fn => {
-    const newState = {
-      ...state,
-      i18n: fn(state.i18n)
+  updateI18n: prevComponent => fn => {
+    const nextComponent = {
+      ...prevComponent,
+      i18n: fn(prevComponent.i18n)
     };
 
-    when(base.i18nValidator, () => base.i18nValidator(newState));
+    when(nextComponent.i18nValidator, () =>
+      nextComponent.i18nValidator(nextComponent)
+    );
 
-    base.render(base)(newState);
+    nextComponent.render(nextComponent);
 
-    when(base.didUpdateI18n, () => base.didUpdateI18n(newState));
+    when(nextComponent.didUpdateI18n, () =>
+      nextComponent.didUpdateI18n(nextComponent)
+    );
 
-    return newState;
+    return nextComponent;
   }
 });

@@ -2,21 +2,21 @@ import { when } from "../when";
 
 export const mount = _ => ({
   ..._,
-  mount: base => state => {
-    when(base.didMount, () => {
-      base.didMount({
+  mount: (component, cb) => {
+    when(component.didMount, () => {
+      component.didMount({
         updateProps: fn => {
-          state = base.updateProps(base)(state)(fn);
+          component = component.updateProps(component)(fn);
         },
         updateActions: fn => {
-          state = base.updateActions(base)(state)(fn);
+          component = component.updateActions(component)(fn);
         },
         updateAttributes: fn => {
-          state = base.updateAttributes(base)(state)(fn);
+          component = component.updateAttributes(component)(fn);
         }
       });
     });
 
-    base.render(base)(state);
+    component.render(component);
   }
 });

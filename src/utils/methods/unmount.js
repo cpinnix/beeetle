@@ -2,6 +2,8 @@ import { when } from "../when";
 
 export const unmount = _ => ({
   ..._,
-  unmount: base => () =>
-    when(base.hooks && base.hooks.unmount, () => base.hooks.unmount())
+  unmount: component =>
+    when(component.hooks && component.hooks.unmount, () =>
+      component.hooks.unmount()
+    )
 });

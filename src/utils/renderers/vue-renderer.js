@@ -2,11 +2,11 @@ import Vue from "vue";
 
 export const vue = fn => _ => ({
   ..._,
-  renderer: base => state => {
+  renderer: component => {
     new Vue({
-      el: state.element,
-      data: state,
-      render: fn(state)
+      el: component.element,
+      data: component,
+      render: fn(component)
     });
   }
 });

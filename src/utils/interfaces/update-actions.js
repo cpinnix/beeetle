@@ -2,20 +2,20 @@ import { either } from "../either";
 
 export const updateActions = _ => ({
   ..._,
-  updateActions: base => state => fn => {
-    let newState = {
-      ...state,
-      actions: fn(state.actions)
+  updateActions: prevComponent => fn => {
+    let nextComponent = {
+      ...prevComponent,
+      actions: fn(prevComponent.actions)
     };
 
-    newState = either(
-      base.actionsTransformer && state.actions,
-      () => base.actionsTransformer(base)(newState),
-      () => newState
+    nextComponent = either(
+      nextComponent.actionsTransformer && nextComponent.actions,
+      () => nextComponent.actionsTransformer(nextComponent),
+      () => nextComponent
     );
 
-    base.render(base)(newState);
+    nextComponent.render(nextComponent);
 
-    return newState;
+    return nextComponent;
   }
 });

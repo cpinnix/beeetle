@@ -1,4 +1,4 @@
 export const html = fn => _ => ({
   ..._,
-  renderer: base => state => (state.element.innerHTML = fn(state))
+  renderer: component => (component.element.innerHTML = fn(component))
 });

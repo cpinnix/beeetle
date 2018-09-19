@@ -7,7 +7,8 @@ export const component = base => {
     constructor() {
       super();
 
-      this.state = {
+      this.component = {
+        ...base,
         name: base.name,
         props: base.defaultProps,
         attrs: base.defaultAttrs,
@@ -16,44 +17,48 @@ export const component = base => {
       };
 
       when(
-        this.state.name && base.updateName,
+        this.component.name && this.component.updateName,
         () =>
-          (this.state = base.updateName(base)(this.state)(
-            () => this.state.name
+          (this.component = this.component.updateName(this.component)(
+            () => this.component.name
           ))
       );
 
-      when(base.updateProps, () => {
-        this.state = base.updateProps(base)(this.state)(() => this.state.props);
+      when(this.component.updateProps, () => {
+        this.component = this.component.updateProps(this.component)(
+          () => this.component.props
+        );
 
         Object.defineProperty(this, "props", {
-          get: () => this.state.props,
+          get: () => this.component.props,
           set: fn => {
-            this.state = base.updateProps(base)(this.state)(fn);
+            this.component = this.component.updateProps(this.component)(fn);
           }
         });
       });
 
-      when(base.updateActions, () => {
-        this.state = base.updateActions(base)(this.state)(
-          () => this.state.actions
+      when(this.component.updateActions, () => {
+        this.component = this.component.updateActions(this.component)(
+          () => this.component.actions
         );
 
         Object.defineProperty(this, "actions", {
-          get: () => this.state.actions,
+          get: () => this.component.actions,
           set: fn => {
-            this.state = base.updateActions(base)(this.state)(fn);
+            this.component = this.component.updateActions(this.component)(fn);
           }
         });
       });
 
-      when(this.state.i18n && base.updateI18n, () => {
-        this.state = base.updateI18n(base)(this.state)(() => this.state.i18n);
+      when(this.component.i18n && this.component.updateI18n, () => {
+        this.component = this.component.updateI18n(this.component)(
+          () => this.component.i18n
+        );
 
         Object.defineProperty(this, "i18n", {
-          get: () => this.state.i18n,
+          get: () => this.component.i18n,
           set: fn => {
-            this.state = base.updateI18n(base)(this.state)(fn);
+            this.component = this.component.updateI18n(this.component)(fn);
           }
         });
       });
@@ -61,14 +66,15 @@ export const component = base => {
 
     connectedCallback() {
       when(
-        base.updateElement,
-        () => (this.state = base.updateElement(base)(this.state)(this))
+        this.component.updateElement,
+        () =>
+          (this.component = this.component.updateElement(this.component)(this))
       );
-      when(base.mount, () => base.mount(base)(this.state));
+      when(this.component.mount, () => this.component.mount(this.component));
     }
 
     disconnectedCallback() {
-      base.unmount && base.unmount(base)(this.state);
+      this.component.unmount && this.component.unmount(this.component);
     }
   }
 
