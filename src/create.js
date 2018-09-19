@@ -9,10 +9,12 @@ import {
   updateName,
   actionsTransformer,
   didUpdateI18n,
+  i18nValidator,
   render,
   mount,
   unmount
-} from "../utils";
+} from "./utils";
+import { printWarning } from "./print-warning";
 
 const create = (...plugins) =>
   pipe(
@@ -30,6 +32,14 @@ const create = (...plugins) =>
         {}
       )
     })),
+    i18nValidator(({ i18n, name }) =>
+      Object.keys(i18n).forEach(key => {
+        if (key !== key.toUpperCase())
+          printWarning(
+            `Failed i18n key: Invalid key \`${key}\` not uppercase supplied to \`${name}\`, expected uppercase key.`
+          );
+      })
+    ),
     didUpdateI18n(({ name, i18n }) =>
       console.log(["I18N", name, JSON.stringify(i18n)].join(" | "))
     ),

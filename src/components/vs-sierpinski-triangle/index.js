@@ -1,9 +1,9 @@
-import create from "../create";
+import create from "../../create";
 import { hyper, name, props, shouldRender } from "../../utils";
-import "../ui-dot";
+import "../vs-dot";
 
 create(
-  name("ui-sierpinski-triangle"),
+  name("vs-sierpinski-triangle"),
   props({
     x: 0,
     y: 0,
@@ -16,29 +16,29 @@ create(
 
     if (s <= targetSize) {
       return wire()`
-        <ui-dot
+        <vs-dot
           props=${() => ({
             x: x - targetSize / 2,
             y: y - targetSize / 2,
             size: targetSize,
             children
           })}
-        ></ui-dot>
+        ></vs-dot>
       `;
     }
 
     ns /= 2;
 
     return wire()`
-      <ui-sierpinski-triangle
+      <vs-sierpinski-triangle
         props=${() => ({ x, y: y - ns / 2, s: ns, children })}
-      ></ui-sierpinski-triangle>
-      <ui-sierpinski-triangle
+      ></vs-sierpinski-triangle>
+      <vs-sierpinski-triangle
         props=${() => ({ x: x - ns, y: y + ns / 2, s: ns, children })}
-      ></ui-sierpinski-triangle>
-      <ui-sierpinski-triangle
+      ></vs-sierpinski-triangle>
+      <vs-sierpinski-triangle
         props=${() => ({ x: x + ns, y: y + ns / 2, s: ns, children })}
-      ></ui-sierpinski-triangle>
+      ></vs-sierpinski-triangle>
     `;
   }),
   shouldRender((oldProps, newProps) => {

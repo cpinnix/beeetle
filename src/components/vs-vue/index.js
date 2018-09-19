@@ -1,6 +1,6 @@
-import create from "../create";
+import create from "../../create";
 import { vue, name, actions } from "../../utils";
-import "../ui-text";
+import "../vs-text";
 
 create(
   name("vs-vue"),
@@ -17,7 +17,7 @@ create(
           }
         },
         [
-          h("ui-text", {
+          h("vs-text", {
             domProps: {
               props: props => ({ ...props, text: "Hello" })
             }

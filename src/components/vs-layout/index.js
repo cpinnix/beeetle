@@ -1,8 +1,8 @@
-import create from "../create";
+import create from "../../create";
 import { raw, name, props } from "../../utils";
 
 create(
-  name("ui-layout"),
+  name("vs-layout"),
   props({
     left: null,
     right: null

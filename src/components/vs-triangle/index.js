@@ -1,9 +1,9 @@
-import create from "../create";
+import create from "../../create";
 import { raw, name, props, didMount } from "../../utils";
-import "../ui-sierpinski-triangle";
+import "../vs-sierpinski-triangle";
 
 create(
-  name("ui-triangle"),
+  name("vs-triangle"),
   props({
     start: new Date().getTime(),
     seconds: 0,
@@ -14,7 +14,7 @@ create(
     let triangle = null;
 
     if (element.innerHTML === "") {
-      triangle = document.createElement("ui-sierpinski-triangle");
+      triangle = document.createElement("vs-sierpinski-triangle");
       element.appendChild(triangle);
     } else {
       triangle = element.children[0];

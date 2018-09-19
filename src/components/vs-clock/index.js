@@ -1,12 +1,13 @@
-import create from "../create";
+import create from "../../create";
 import { hyper, name, i18n, attrs } from "../../utils";
-import "../ui-time";
-import "../ui-text";
+import "../vs-time";
+import "../vs-text";
 
 create(
-  name("ui-clock"),
+  name("vs-clock"),
   i18n({
-    TEXT: "The current time is "
+    TEXT: "The current time is ",
+    hello: "world"
   }),
   attrs({
     loaded: true
@@ -14,13 +15,13 @@ create(
   hyper(
     (wire, { i18n: { TEXT } }) => wire()`
       <div>
-        <ui-text
+        <vs-text
           props=${() => ({
             text: TEXT
           })}
         >
-        </ui-text>
-        <ui-time></ui-time>
+        </vs-text>
+        <vs-time></vs-time>
       </div>
     `
   )

@@ -1,9 +1,9 @@
 /* global document */
 
 import { Router } from "@vaadin/router";
-import "./routes/ui-route-home";
-import "./routes/ui-route-clock";
-import "./routes/ui-route-triangle";
+import "./routes/vs-route-home";
+import "./routes/vs-route-clock";
+import "./routes/vs-route-triangle";
 // import './components/layout';
 // import './components/provider';
 
@@ -12,24 +12,24 @@ const router = new Router(document.getElementById("app"));
 router.setRoutes([
   {
     path: "/",
-    component: "ui-route-home"
+    component: "vs-route-home"
   },
   {
     path: "/clock",
-    component: "ui-route-clock"
+    component: "vs-route-clock"
   },
   {
     path: "/triangle",
-    component: "ui-route-triangle"
+    component: "vs-route-triangle"
   }
 ]);
 
 // document.getElementById('app').innerHTML = `
-//   <ui-provider></ui-provider>
-//   <ui-layout></ui-layout>
+//   <vs-provider></vs-provider>
+//   <vs-layout></vs-layout>
 // `;
 
-// const provider = document.querySelector('ui-provider');
+// const provider = document.querySelector('vs-provider');
 // provider.props = props => ({
 //   ...props,
 //   children: ({ props }) => {
@@ -37,8 +37,8 @@ router.setRoutes([
 //   },
 // });
 //
-// const layout = document.querySelector('ui-layout');
+// const layout = document.querySelector('vs-layout');
 // layout.props = props => ({
 //   ...props,
-//   left: ({ element }) => (element.innerHTML = `<ui-clock></ui-clock>`),
+//   left: ({ element }) => (element.innerHTML = `<vs-clock></vs-clock>`),
 // });

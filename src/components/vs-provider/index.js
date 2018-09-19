@@ -1,8 +1,8 @@
-import create from "../create";
+import create from "../../create";
 import { raw, name, props, didMount } from "../../utils";
 
 create(
-  name("ui-provider"),
+  name("vs-provider"),
   didMount(({ updateProps }) => {
     setTimeout(
       () => updateProps(props => ({ ...props, items: [{ id: 0 }, { id: 1 }] })),

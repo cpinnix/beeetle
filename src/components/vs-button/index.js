@@ -1,21 +1,21 @@
-import create from "../create";
+import create from "../../create";
 import { hyper, name, actions } from "../../utils";
-import "../ui-text";
+import "../vs-text";
 
 create(
-  name("ui-button"),
+  name("vs-button"),
   actions({
     click: () => console.log("hello")
   }),
   hyper(
     (wire, { actions: { click } }) => wire()`
       <button onclick=${click}>
-        <ui-text props=${props => ({
+        <vs-text props=${props => ({
           ...props,
           text: "Hello"
         })}
         >
-        </ui-text>
+        </vs-text>
       </button>
     `
   )

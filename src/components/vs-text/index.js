@@ -1,5 +1,5 @@
 import propTypes from "prop-types";
-import create from "../create";
+import create from "../../create";
 import { hyper, name, props, propsValidator } from "../../utils";
 import classes from "./index.css";
 import { checkPropTypes } from "prop-types";
@@ -9,13 +9,13 @@ const validator = propTypes => ({ props, name }) => {
 };
 
 create(
-  name("ui-text"),
+  name("vs-text"),
   props({
     text: "Put some text here."
   }),
   propsValidator(
     validator({
-      text: propTypes.string
+      text: propTypes.bool
     })
   ),
   hyper(

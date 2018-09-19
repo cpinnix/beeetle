@@ -1,8 +1,8 @@
-import create from "../create";
+import create from "../../create";
 import { hyper, name, props } from "../../utils";
 
 create(
-  name("ui-list"),
+  name("vs-list"),
   props({
     items: []
   }),

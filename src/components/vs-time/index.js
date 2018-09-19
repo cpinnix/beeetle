@@ -1,26 +1,26 @@
 import moment from "moment";
-import create from "../create";
+import create from "../../create";
 import { hyper, name, props, didMount } from "../../utils";
 import classes from "./index.css";
-import "../ui-text";
+import "../vs-text";
 
 const getTime = () => moment().format("LTS");
 
 create(
-  name("ui-time"),
+  name("vs-time"),
   props({
     time: getTime()
   }),
   hyper(
     (wire, { props: { time } }) =>
       wire()`
-      <ui-text
+      <vs-text
         class=${classes.time}
         props=${() => ({
           text: time
         })}
       >
-      </ui-text>
+      </vs-text>
     `
   ),
   didMount(({ updateProps }) => {

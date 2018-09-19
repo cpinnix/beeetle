@@ -8,6 +8,8 @@ export const updateI18n = _ => ({
       i18n: fn(state.i18n)
     };
 
+    if (base.i18nValidator) base.i18nValidator(newState);
+
     render(base)(newState);
 
     if (didUpdateI18n) didUpdateI18n(newState);

@@ -1,13 +1,13 @@
-import create from "../components/create";
+import create from "../create";
 import { name, hyper } from "../utils";
-import "../components/ui-button";
+import "../components/vs-button";
 import "../components/vs-vue";
 
 create(
-  name("ui-route-home"),
+  name("vs-route-home"),
   hyper(
     wire => wire()`
-    <ui-button></ui-button>
+    <vs-button></vs-button>
     <vs-vue></vs-vue>
     `
   )

@@ -1,8 +1,8 @@
-import create from "../create";
+import create from "../../create";
 import { hyper, name, props } from "../../utils";
 
 create(
-  name("ui-dot"),
+  name("vs-dot"),
   props({ size: 16, x: 0, y: 0, children: null }),
   hyper((wire, { props: { size, x, y, children } }) => {
     const s = size * 1.3;
