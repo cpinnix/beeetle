@@ -1,7 +1,9 @@
+import { when } from "../when";
+
 export const mount = _ => ({
   ..._,
   mount: base => state => {
-    if (base.didMount) {
+    when(base.didMount, () => {
       base.didMount({
         updateProps: fn => {
           state = base.updateProps(base)(state)(fn);
@@ -13,7 +15,8 @@ export const mount = _ => ({
           state = base.updateAttributes(base)(state)(fn);
         }
       });
-    }
+    });
+
     base.render(base)(state);
   }
 });

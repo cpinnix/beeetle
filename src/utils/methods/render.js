@@ -1,10 +1,15 @@
+import { when } from "../when";
+import { either } from "../either";
+
 const toBooleanAttributeValue = value =>
   value === true ? "" : value === false ? null : value;
 
 const applyAttribute = (element, name, value) =>
-  value !== null
-    ? element.setAttribute(name, value)
-    : element.removeAttribute(name);
+  either(
+    value !== null,
+    () => element.setAttribute(name, value),
+    () => element.removeAttribute(name)
+  );
 
 const applyAsAttributes = (element, attributes) =>
   Object.keys(attributes).forEach(name =>
@@ -13,10 +18,10 @@ const applyAsAttributes = (element, attributes) =>
 
 export const render = _ => ({
   ..._,
-  render: base => state => {
-    if (state.element) {
+  render: base => state =>
+    when(state.element, () => {
       base.renderer(base)(state);
-      if (state.attrs) applyAsAttributes(state.element, state.attrs);
-    }
-  }
+
+      when(state.attrs, () => applyAsAttributes(state.element, state.attrs));
+    })
 });

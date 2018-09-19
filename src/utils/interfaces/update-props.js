@@ -1,3 +1,6 @@
+import { when } from "../when";
+import { either } from "../either";
+
 export const updateProps = _ => ({
   ..._,
   updateProps: base => state => fn => {
@@ -10,13 +13,13 @@ export const updateProps = _ => ({
 
     const newProps = newState.props;
 
-    if (base.propsValidator) base.propsValidator(newState);
+    when(base.propsValidator, () => base.propsValidator(newState));
 
-    if (base.shouldRender) {
-      if (!base.shouldRender(oldProps, newProps)) return newState;
-    }
-
-    base.render(base)(newState);
+    either(
+      base.shouldRender && !base.shouldRender(oldProps, newProps),
+      () => {},
+      () => base.render(base)(newState)
+    );
 
     return newState;
   }

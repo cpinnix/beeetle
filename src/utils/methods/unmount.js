@@ -1,8 +1,7 @@
+import { when } from "../when";
+
 export const unmount = _ => ({
   ..._,
-  unmount: base => () => {
-    if (base.hooks && base.hooks.unmount) {
-      base.hooks.unmount();
-    }
-  }
+  unmount: base => () =>
+    when(base.hooks && base.hooks.unmount, () => base.hooks.unmount())
 });

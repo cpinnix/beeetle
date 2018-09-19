@@ -1,18 +1,18 @@
+import { when } from "../when";
+
 export const updateI18n = _ => ({
   ..._,
   updateI18n: base => state => fn => {
-    const { render, didUpdateI18n } = base;
-
     const newState = {
       ...state,
       i18n: fn(state.i18n)
     };
 
-    if (base.i18nValidator) base.i18nValidator(newState);
+    when(base.i18nValidator, () => base.i18nValidator(newState));
 
-    render(base)(newState);
+    base.render(base)(newState);
 
-    if (didUpdateI18n) didUpdateI18n(newState);
+    when(base.didUpdateI18n, () => base.didUpdateI18n(newState));
 
     return newState;
   }

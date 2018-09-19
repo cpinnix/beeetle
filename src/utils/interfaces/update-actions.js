@@ -1,3 +1,5 @@
+import { either } from "../either";
+
 export const updateActions = _ => ({
   ..._,
   updateActions: base => state => fn => {
@@ -6,11 +8,13 @@ export const updateActions = _ => ({
       actions: fn(state.actions)
     };
 
-    if (base.actionsTransformer && state.actions) {
-      newState = base.actionsTransformer(base)(state);
-    }
+    newState = either(
+      base.actionsTransformer && state.actions,
+      () => base.actionsTransformer(base)(newState),
+      () => newState
+    );
 
-    base.render(base)(state);
+    base.render(base)(newState);
 
     return newState;
   }
