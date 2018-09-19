@@ -1,15 +1,13 @@
 import create from "../create";
-import { raw, name, props, hooks } from "../../utils";
+import { raw, name, props, didMount } from "../../utils";
 
 create(
   name("ui-provider"),
-  hooks({
-    mount({ setProps }) {
-      setTimeout(
-        () => setProps(props => ({ ...props, items: [{ id: 0 }, { id: 1 }] })),
-        1000
-      );
-    }
+  didMount(({ updateProps }) => {
+    setTimeout(
+      () => updateProps(props => ({ ...props, items: [{ id: 0 }, { id: 1 }] })),
+      1000
+    );
   }),
   props({
     children: null,

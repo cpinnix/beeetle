@@ -1,21 +1,15 @@
 import {
   component,
   pipe,
-  setElement,
-  getElement,
-  setProps,
-  getProps,
-  setActions,
-  getActions,
-  setAttrs,
-  getAttrs,
-  setI18n,
-  getI18n,
-  setName,
-  getName,
+  updateElement,
+  updateProps,
+  updateActions,
+  updateAttrs,
+  updateI18n,
+  updateName,
   actionsTransformer,
   didUpdateI18n,
-  update,
+  render,
   mount,
   unmount
 } from "../utils";
@@ -23,13 +17,14 @@ import {
 const create = (...plugins) =>
   pipe(
     ...plugins,
-    actionsTransformer(state => actions => ({
-      ...Object.keys(actions).reduce(
+    actionsTransformer(state => ({
+      ...state,
+      actions: Object.keys(state.actions).reduce(
         (a, v) => ({
           ...a,
           [v]: () => {
             console.log(["ACTION", state.name, v].join(" | "));
-            return actions[v];
+            return state.actions[v];
           }
         }),
         {}
@@ -38,19 +33,13 @@ const create = (...plugins) =>
     didUpdateI18n(({ name, i18n }) =>
       console.log(["I18N", name, JSON.stringify(i18n)].join(" | "))
     ),
-    setElement,
-    getElement,
-    setProps,
-    getProps,
-    setActions,
-    getActions,
-    setAttrs,
-    getAttrs,
-    setI18n,
-    getI18n,
-    setName,
-    getName,
-    update,
+    updateElement,
+    updateProps,
+    updateActions,
+    updateAttrs,
+    updateI18n,
+    updateName,
+    render,
     mount,
     unmount,
     component

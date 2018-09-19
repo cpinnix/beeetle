@@ -6,47 +6,57 @@ export const component = base => {
       super();
 
       this.state = {
-        name: base.name ? base.name() : null,
-        props: base.props ? base.props() : null,
-        attrs: base.attrs ? base.attrs() : null,
-        i18n: base.i18n ? base.i18n() : null,
-        actions: base.actions ? base.actions() : null
+        name: base.name,
+        props: base.defaultProps,
+        attrs: base.defaultAttrs,
+        i18n: base.defaultI18n,
+        actions: base.defaultActions
       };
 
-      if (this.state.name && base.setName) {
-        base.setName(base)(this.state, () => this.state.name);
+      if (this.state.name && base.updateName) {
+        this.state = base.updateName(base)(this.state)(() => this.state.name);
       }
 
-      if (base.setProps) {
-        base.setProps(base)(this.state, () => this.state.props);
+      if (base.updateProps) {
+        this.state = base.updateProps(base)(this.state)(() => this.state.props);
 
         Object.defineProperty(this, "props", {
-          get: () => base.getProps(base)(this.state),
-          set: fn => base.setProps(base)(this.state, fn)
+          get: () => this.state.props,
+          set: fn => {
+            this.state = base.updateProps(base)(this.state)(fn);
+          }
         });
       }
 
-      if (base.setActions) {
-        base.setActions(base)(this.state, () => this.state.actions);
+      if (base.updateActions) {
+        this.state = base.updateActions(base)(this.state)(
+          () => this.state.actions
+        );
 
         Object.defineProperty(this, "actions", {
-          get: () => base.getActions(base)(this.state),
-          set: fn => base.setActions(base)(this.state, fn)
+          get: () => this.state.actions,
+          set: fn => {
+            this.state = base.updateActions(base)(this.state)(fn);
+          }
         });
       }
 
-      if (this.state.i18n && base.setI18n) {
-        base.setI18n(base)(this.state, () => this.state.i18n);
+      if (this.state.i18n && base.updateI18n) {
+        this.state = base.updateI18n(base)(this.state)(() => this.state.i18n);
 
         Object.defineProperty(this, "i18n", {
-          get: () => base.getI18n(base)(this.state),
-          set: fn => base.setI18n(base)(this.state, fn)
+          get: () => this.state.i18n,
+          set: fn => {
+            this.state = base.updateI18n(base)(this.state)(fn);
+          }
         });
       }
     }
 
     connectedCallback() {
-      base.setElement && base.setElement(base)(this.state, this);
+      if (base.updateElement) {
+        this.state = base.updateElement(base)(this.state)(this);
+      }
       base.mount && base.mount(base)(this.state);
     }
 
@@ -55,5 +65,5 @@ export const component = base => {
     }
   }
 
-  customElements.define(base.name(), Base);
+  customElements.define(base.name, Base);
 };

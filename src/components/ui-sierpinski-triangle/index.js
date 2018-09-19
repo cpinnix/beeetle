@@ -1,5 +1,5 @@
 import create from "../create";
-import { hyper, name, props, hooks } from "../../utils";
+import { hyper, name, props, shouldRender } from "../../utils";
 import "../ui-dot";
 
 create(
@@ -41,16 +41,14 @@ create(
       ></ui-sierpinski-triangle>
     `;
   }),
-  hooks({
-    shouldUpdate: (oldProps, newProps) => {
-      const o = oldProps;
-      const n = newProps;
-      return !(
-        o.x === n.x &&
-        o.y === n.y &&
-        o.s === n.s &&
-        o.children === n.children
-      );
-    }
+  shouldRender((oldProps, newProps) => {
+    const o = oldProps;
+    const n = newProps;
+    return !(
+      o.x === n.x &&
+      o.y === n.y &&
+      o.s === n.s &&
+      o.children === n.children
+    );
   })
 );

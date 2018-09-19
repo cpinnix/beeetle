@@ -1,4 +1,4 @@
-export const i18n = i18n => _ => ({
+export const i18n = defaultI18n => _ => ({
   ..._,
-  i18n: () => i18n
+  defaultI18n
 });

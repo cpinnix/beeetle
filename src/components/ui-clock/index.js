@@ -1,5 +1,5 @@
 import create from "../create";
-import { hyper, name, i18n, attrs, didUpdateI18n } from "../../utils";
+import { hyper, name, i18n, attrs } from "../../utils";
 import "../ui-time";
 import "../ui-text";
 
