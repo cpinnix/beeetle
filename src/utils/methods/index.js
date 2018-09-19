@@ -1,4 +1,3 @@
-export * from "./hooks";
-export * from "./update";
+export * from "./render";
 export * from "./mount";
 export * from "./unmount";

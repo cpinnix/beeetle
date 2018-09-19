@@ -1,5 +1,5 @@
 import create from "../create";
-import { raw, hooks, name, props } from "../../utils";
+import { raw, name, props, didMount } from "../../utils";
 import "../ui-sierpinski-triangle";
 
 create(
@@ -42,23 +42,21 @@ create(
           : ({ element }) => (element.innerHTML = `<div>${seconds}</div>`)
     });
   }),
-  hooks({
-    mount: ({ updateProps }) => {
-      const tick = () => {
-        updateProps(props => {
-          const elapsed = new Date().getTime() - props.start;
-          const newSeconds = Math.floor(elapsed / 1000);
-          return {
-            ...props,
-            elapsed,
-            seconds: props.newSeconds,
-            newSeconds
-          };
-        });
-        requestAnimationFrame(tick);
-      };
-
+  didMount(({ updateProps }) => {
+    const tick = () => {
+      updateProps(props => {
+        const elapsed = new Date().getTime() - props.start;
+        const newSeconds = Math.floor(elapsed / 1000);
+        return {
+          ...props,
+          elapsed,
+          seconds: props.newSeconds,
+          newSeconds
+        };
+      });
       requestAnimationFrame(tick);
-    }
+    };
+
+    requestAnimationFrame(tick);
   })
 );

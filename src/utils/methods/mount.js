@@ -1,8 +1,8 @@
 export const mount = _ => ({
   ..._,
   mount: base => state => {
-    if (base.hooks && base.hooks.mount) {
-      base.hooks.mount({
+    if (base.didMount) {
+      base.didMount({
         updateProps: fn => {
           state = base.updateProps(base)(state)(fn);
         },
@@ -14,6 +14,6 @@ export const mount = _ => ({
         }
       });
     }
-    base.update(base)(state);
+    base.render(base)(state);
   }
 });

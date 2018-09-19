@@ -9,7 +9,7 @@ import {
   updateName,
   actionsTransformer,
   didUpdateI18n,
-  update,
+  render,
   mount,
   unmount
 } from "../utils";
@@ -17,13 +17,14 @@ import {
 const create = (...plugins) =>
   pipe(
     ...plugins,
-    actionsTransformer(state => actions => ({
-      ...Object.keys(actions).reduce(
+    actionsTransformer(state => ({
+      ...state,
+      actions: Object.keys(state.actions).reduce(
         (a, v) => ({
           ...a,
           [v]: () => {
             console.log(["ACTION", state.name, v].join(" | "));
-            return actions[v];
+            return state.actions[v];
           }
         }),
         {}
@@ -38,7 +39,7 @@ const create = (...plugins) =>
     updateAttrs,
     updateI18n,
     updateName,
-    update,
+    render,
     mount,
     unmount,
     component

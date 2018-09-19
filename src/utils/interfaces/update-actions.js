@@ -7,13 +7,10 @@ export const updateActions = _ => ({
     };
 
     if (base.actionsTransformer && state.actions) {
-      newState = {
-        ...state,
-        actions: base.actionsTransformer(base)(state)(state.actions)
-      };
+      newState = base.actionsTransformer(base)(state);
     }
 
-    base.update(base)(state);
+    base.render(base)(state);
 
     return newState;
   }

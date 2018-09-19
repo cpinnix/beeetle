@@ -12,11 +12,11 @@ export const updateProps = _ => ({
 
     if (base.propsValidator) base.propsValidator(newState);
 
-    if (base.hooks && base.hooks.shouldUpdate) {
-      if (!base.hooks.shouldUpdate(oldProps, newProps)) return newState;
+    if (base.shouldRender) {
+      if (!base.shouldRender(oldProps, newProps)) return newState;
     }
 
-    base.update(base)(newState);
+    base.render(base)(newState);
 
     return newState;
   }

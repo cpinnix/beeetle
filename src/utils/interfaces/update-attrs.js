@@ -6,7 +6,7 @@ export const updateAttrs = _ => ({
       attrs: fn(state.attrs)
     };
 
-    base.update(base)(newState);
+    base.render(base)(newState);
 
     return newState;
   }

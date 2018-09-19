@@ -11,11 +11,11 @@ const applyAsAttributes = (element, attributes) =>
     applyAttribute(element, name, toBooleanAttributeValue(attributes[name]))
   );
 
-export const update = _ => ({
+export const render = _ => ({
   ..._,
-  update: base => state => {
+  render: base => state => {
     if (state.element) {
-      base.render(base)(state);
+      base.renderer(base)(state);
       if (state.attrs) applyAsAttributes(state.element, state.attrs);
     }
   }

@@ -1,14 +1,14 @@
 export const updateI18n = _ => ({
   ..._,
   updateI18n: base => state => fn => {
-    const { update, didUpdateI18n } = base;
+    const { render, didUpdateI18n } = base;
 
     const newState = {
       ...state,
       i18n: fn(state.i18n)
     };
 
-    update(base)(newState);
+    render(base)(newState);
 
     if (didUpdateI18n) didUpdateI18n(newState);
 
