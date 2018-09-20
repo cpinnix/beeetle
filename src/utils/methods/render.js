@@ -22,8 +22,8 @@ export const render = _ => ({
     when(component.element, () => {
       component.renderer(component);
 
-      when(component.attrs, () =>
-        applyAsAttributes(component.element, component.attrs)
+      when(component.state.attrs, () =>
+        applyAsAttributes(component.element, component.state.attrs)
       );
     })
 });

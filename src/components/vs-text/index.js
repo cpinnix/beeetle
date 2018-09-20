@@ -1,25 +1,34 @@
 import propTypes from "prop-types";
 import create from "../../create";
-import { hyper, name, props, propsValidator } from "../../utils";
+import { hyper, name, state, stateValidator } from "../../utils";
 import classes from "./index.css";
 import { checkPropTypes } from "prop-types";
 
-const validator = propTypes => ({ props, name }) => {
+const validator = propTypes => ({ state: { props, name } }) => {
   checkPropTypes(propTypes, props, "prop", name);
 };
 
 create(
   name("vs-text"),
-  props({
-    text: "Put some text here."
+  state({
+    props: {
+      text: "Put some text here."
+    }
   }),
-  propsValidator(
+  stateValidator(state =>
     validator({
       text: propTypes.bool
     })
   ),
   hyper(
-    (wire, { props: { text } }) => wire()`
+    (
+      wire,
+      {
+        state: {
+          props: { text }
+        }
+      }
+    ) => wire()`
       <span class=${classes.text}>${text}</span>
     `
   )

@@ -1,12 +1,14 @@
 import create from "../../create";
-import { hyper, name, props } from "../../utils";
+import { hyper, name, state } from "../../utils";
 
 create(
   name("vs-list"),
-  props({
-    items: []
+  state({
+    props: {
+      items: []
+    }
   }),
-  hyper((wire, { props: { items } }) =>
+  hyper((wire, { state: { props: { items } } }) =>
     items.map(({ id }) => wire(id)`<div>${id}</div>`)
   )
 );

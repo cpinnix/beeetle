@@ -1,1 +1,1 @@
-export * from "./actions-transformer";
+export * from "./state-transformer";

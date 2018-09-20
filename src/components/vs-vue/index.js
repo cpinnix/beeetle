@@ -1,13 +1,15 @@
 import create from "../../create";
-import { vue, name, actions } from "../../utils";
+import { vue, name, state } from "../../utils";
 import "../vs-text";
 
 create(
   name("vs-vue"),
-  actions({
-    click: () => console.log("hello")
+  state({
+    actions: {
+      click: () => console.log("hello")
+    }
   }),
-  vue(({ actions: { click } }) => h => {
+  vue(({ state: { actions: { click } } }) => h => {
     return h("div", [
       h(
         "button",
@@ -19,7 +21,10 @@ create(
         [
           h("vs-text", {
             domProps: {
-              props: props => ({ ...props, text: "Hello" })
+              state: state => ({
+                ...state,
+                props: { ...state.props, text: "Hello" }
+              })
             }
           })
         ]

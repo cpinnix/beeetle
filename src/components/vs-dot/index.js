@@ -1,10 +1,10 @@
 import create from "../../create";
-import { hyper, name, props } from "../../utils";
+import { hyper, name, state } from "../../utils";
 
 create(
   name("vs-dot"),
-  props({ size: 16, x: 0, y: 0, children: null }),
-  hyper((wire, { props: { size, x, y, children } }) => {
+  state({ props: { size: 16, x: 0, y: 0, children: null } }),
+  hyper((wire, { state: { props: { size, x, y, children } } }) => {
     const s = size * 1.3;
 
     const dotStyle = {
