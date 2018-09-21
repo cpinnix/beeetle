@@ -11,6 +11,6 @@ export const mount = _ => ({
       });
     });
 
-    component.renderer(component.element, component.state);
+    component.render(component.element, component.state);
   }
 });

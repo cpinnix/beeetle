@@ -3,6 +3,8 @@
 import { when } from "./when";
 
 export const component = base => {
+  console.log(base);
+
   class Base extends HTMLElement {
     constructor() {
       super();
