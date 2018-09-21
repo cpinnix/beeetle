@@ -1,10 +1,10 @@
 export * from "./name";
 export * from "./state";
-export * from "./interfaces";
-export * from "./validators";
-export * from "./transformers";
 export * from "./renderers";
-export * from "./methods";
+export * from "./update";
+export * from "./mount";
+export * from "./unmount";
+export * from "./render";
 export * from "./hooks";
 export * from "./component";
 

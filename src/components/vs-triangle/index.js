@@ -12,7 +12,7 @@ create(
       elapsed: 0
     }
   }),
-  raw(({ element, state: { props: { elapsed, seconds, newSeconds } } }) => {
+  raw((element, { props: { elapsed, seconds, newSeconds } }) => {
     let triangle = null;
 
     if (element.innerHTML === "") {

@@ -55,9 +55,9 @@ create(
       ></vs-sierpinski-triangle>
     `;
   }),
-  shouldRender((prevComponent, nextComponent) => {
-    const prevProps = prevComponent.state.props;
-    const nextProps = nextComponent.state.props;
+  shouldRender((prevState, nextState) => {
+    const prevProps = prevState.props;
+    const nextProps = nextState.props;
     const o = prevProps;
     const n = nextProps;
     return !(

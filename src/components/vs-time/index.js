@@ -14,8 +14,7 @@ create(
     }
   }),
   hyper(
-    (wire, { props: { time } }) =>
-      wire()`
+    (wire, { props: { time } }) => wire()`
       <vs-text
         class=${classes.time}
         state=${state => ({
@@ -35,7 +34,7 @@ create(
         update(state => ({
           ...state,
           props: {
-            ...props,
+            ...state.props,
             time: getTime()
           }
         })),

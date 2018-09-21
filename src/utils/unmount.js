@@ -1,4 +1,4 @@
-import { when } from "../when";
+import { when } from "./when";
 
 export const unmount = _ => ({
   ..._,

@@ -1,4 +1,4 @@
-import { when } from "../when";
+import { when } from "./when";
 
 export const mount = _ => ({
   ..._,
@@ -10,8 +10,6 @@ export const mount = _ => ({
         }
       });
     });
-
-    console.log("mount", component);
 
     component.renderer(component.element, component.state);
   }
