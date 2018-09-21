@@ -9,13 +9,7 @@ create(
       click: () => console.log("hello")
     }
   }),
-  hyper((wire, component) => {
-    debugger;
-    const {
-      state: {
-        actions: { click }
-      }
-    } = component;
+  hyper((wire, { actions: { click } }) => {
     return wire()`
       <button onclick=${click}>
         <vs-text state=${state => ({

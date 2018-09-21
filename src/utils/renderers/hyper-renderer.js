@@ -2,5 +2,5 @@ import { bind, wire } from "hyperhtml";
 
 export const hyper = fn => _ => ({
   ..._,
-  renderer: component => bind(component.element)`${fn(wire, component)}`
+  renderer: (element, state) => bind(element)`${fn(wire, state)}`
 });

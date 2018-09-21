@@ -11,7 +11,7 @@ create(
       s: 16
     }
   }),
-  hyper((wire, { state: { props: { x, y, s, children } } }) => {
+  hyper((wire, { props: { x, y, s, children } }) => {
     const targetSize = 25;
 
     let ns = s;
@@ -19,11 +19,14 @@ create(
     if (s <= targetSize) {
       return wire()`
         <vs-dot
-          props=${() => ({
-            x: x - targetSize / 2,
-            y: y - targetSize / 2,
-            size: targetSize,
-            children
+          state=${state => ({
+            ...state,
+            props: {
+              x: x - targetSize / 2,
+              y: y - targetSize / 2,
+              size: targetSize,
+              children
+            }
           })}
         ></vs-dot>
       `;
@@ -33,19 +36,19 @@ create(
 
     return wire()`
       <vs-sierpinski-triangle
-        props=${state => ({
+        state=${state => ({
           ...state,
           props: { ...state.props, x, y: y - ns / 2, s: ns, children }
         })}
       ></vs-sierpinski-triangle>
       <vs-sierpinski-triangle
-        props=${state => ({
+        state=${state => ({
           ...state,
           props: { ...state.props, x: x - ns, y: y + ns / 2, s: ns, children }
         })}
       ></vs-sierpinski-triangle>
       <vs-sierpinski-triangle
-        props=${state => ({
+        state=${state => ({
           ...state,
           props: { ...state.props, x: x + ns, y: y + ns / 2, s: ns, children }
         })}

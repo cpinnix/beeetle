@@ -9,7 +9,7 @@ create(
       right: null
     }
   }),
-  raw(({ element, state: { props: { left, right } } }) => {
+  raw((element, { props: { left, right } }) => {
     element.innerHTML = `
       <div>
         <div class="left"></div>

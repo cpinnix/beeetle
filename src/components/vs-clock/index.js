@@ -15,14 +15,7 @@ create(
     }
   }),
   hyper(
-    (
-      wire,
-      {
-        state: {
-          i18n: { TEXT }
-        }
-      }
-    ) => wire()`
+    (wire, { i18n: { TEXT } }) => wire()`
       <div>
         <vs-text
           state=${state => ({

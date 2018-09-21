@@ -3,10 +3,10 @@ import { raw, name, state, didMount } from "../../utils";
 
 create(
   name("vs-provider"),
-  didMount(({ updateState }) => {
+  didMount(({ update }) => {
     setTimeout(
       () =>
-        updateState(state => ({
+        update(state => ({
           ...state,
           props: { ...state.props, items: [{ id: 0 }, { id: 1 }] }
         })),
@@ -19,7 +19,7 @@ create(
       items: {}
     }
   }),
-  raw(({ state }) => {
+  raw(state => {
     state.props.children && state.props.children(state);
   })
 );

@@ -4,7 +4,7 @@ import { hyper, name, state } from "../../utils";
 create(
   name("vs-dot"),
   state({ props: { size: 16, x: 0, y: 0, children: null } }),
-  hyper((wire, { state: { props: { size, x, y, children } } }) => {
+  hyper((wire, { props: { size, x, y, children } }) => {
     const s = size * 1.3;
 
     const dotStyle = {

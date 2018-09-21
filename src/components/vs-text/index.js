@@ -15,20 +15,13 @@ create(
       text: "Put some text here."
     }
   }),
-  stateValidator(state =>
-    validator({
-      text: propTypes.bool
-    })
-  ),
+  // stateValidator(state =>
+  //   validator({
+  //     text: propTypes.bool,
+  //   })
+  // ),
   hyper(
-    (
-      wire,
-      {
-        state: {
-          props: { text }
-        }
-      }
-    ) => wire()`
+    (wire, { props: { text } }) => wire()`
       <span class=${classes.text}>${text}</span>
     `
   )

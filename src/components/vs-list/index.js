@@ -8,7 +8,7 @@ create(
       items: []
     }
   }),
-  hyper((wire, { state: { props: { items } } }) =>
+  hyper((wire, { props: { items } }) =>
     items.map(({ id }) => wire(id)`<div>${id}</div>`)
   )
 );

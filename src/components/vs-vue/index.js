@@ -9,7 +9,7 @@ create(
       click: () => console.log("hello")
     }
   }),
-  vue(({ state: { actions: { click } } }) => h => {
+  vue(({ actions: { click } }) => h => {
     return h("div", [
       h(
         "button",

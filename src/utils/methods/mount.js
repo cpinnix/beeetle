@@ -2,15 +2,17 @@ import { when } from "../when";
 
 export const mount = _ => ({
   ..._,
-  mount: (component, cb) => {
+  mount: component => {
     when(component.didMount, () => {
       component.didMount({
-        updateState: fn => {
-          component = component.updateState(component)(fn);
+        update: fn => {
+          component = component.update(component)(fn);
         }
       });
     });
 
-    component.render(component);
+    console.log("mount", component);
+
+    component.renderer(component.element, component.state);
   }
 });

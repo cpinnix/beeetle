@@ -1,4 +1,4 @@
-export const state = defaultstate => _ => ({
+export const state = defaultState => _ => ({
   ..._,
-  defaultstate
+  defaultState
 });

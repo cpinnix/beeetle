@@ -1,9 +1,8 @@
 import { when } from "../when";
-import { either } from "../either";
 
-export const updateState = _ => ({
+export const update = _ => ({
   ..._,
-  updateState: prevComponent => fn => {
+  update: prevComponent => fn => {
     const prevState = prevComponent.state;
 
     const nextComponent = {
@@ -17,11 +16,15 @@ export const updateState = _ => ({
       nextComponent.stateValidator(nextComponent)
     );
 
-    either(
-      nextComponent.shouldRender &&
-        !nextComponent.shouldRender(prevState, nextState),
-      () => {},
-      () => nextComponent.render(nextComponent)
+    when(
+      nextComponent.element,
+      when(
+        !nextComponent.shouldRender ||
+          (nextComponent.shouldRender &&
+            !nextComponent.shouldRender(prevState, nextState)),
+        () => {},
+        () => nextComponent.render(nextComponent.element, nextComponent.state)
+      )
     );
 
     return nextComponent;

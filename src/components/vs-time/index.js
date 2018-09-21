@@ -14,30 +14,30 @@ create(
     }
   }),
   hyper(
-    (
-      wire,
-      {
-        state: {
-          props: { time }
-        }
-      }
-    ) =>
+    (wire, { props: { time } }) =>
       wire()`
       <vs-text
         class=${classes.time}
-        props=${() => ({
-          text: time
+        state=${state => ({
+          ...state,
+          props: {
+            ...state.props,
+            text: time
+          }
         })}
       >
       </vs-text>
     `
   ),
-  didMount(({ updateProps }) => {
+  didMount(({ update }) => {
     setInterval(
       () =>
-        updateProps(props => ({
-          ...props,
-          time: getTime()
+        update(state => ({
+          ...state,
+          props: {
+            ...props,
+            time: getTime()
+          }
         })),
       1000
     );
