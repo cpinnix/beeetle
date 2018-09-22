@@ -1,8 +1,8 @@
-import create from "../../create";
+import component from "../component";
 import { render, name, state, componentDidMount } from "../../utils";
 import "../vs-sierpinski-triangle";
 
-create(
+component(
   name("vs-triangle"),
   state({
     props: {
@@ -16,7 +16,7 @@ create(
     let triangle = null;
 
     if (element.innerHTML === "") {
-      triangle = document.createElement("vs-sierpinski-triangle");
+      triangle = document.componentElement("vs-sierpinski-triangle");
       element.appendChild(triangle);
     } else {
       triangle = element.children[0];

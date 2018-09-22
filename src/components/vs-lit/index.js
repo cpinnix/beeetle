@@ -1,9 +1,9 @@
-import create from "../../create";
+import component from "../component";
 import { lit } from "../../lit";
 import { render, name, state } from "../../utils";
 import "../vs-text";
 
-create(
+component(
   name("vs-lit"),
   state({
     props: {

@@ -1,7 +1,7 @@
-import create from "../../create";
+import component from "../component";
 import { raw, name, state, componentDidMount } from "../../utils";
 
-create(
+component(
   name("vs-provider"),
   componentDidMount(({ update }) => {
     setTimeout(

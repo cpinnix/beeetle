@@ -1,7 +1,7 @@
-import create from "../../create";
+import component from "../component";
 import { hyper, name, state } from "../../utils";
 
-create(
+component(
   name("vs-list"),
   state({
     props: {

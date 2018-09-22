@@ -1,5 +1,5 @@
 import moment from "moment";
-import create from "../../create";
+import component from "../component";
 import { hyper } from "../../hyper";
 import { render, name, state, componentDidMount } from "../../utils";
 import classes from "./index.css";
@@ -7,7 +7,7 @@ import "../vs-text";
 
 const getTime = () => moment().format("LTS");
 
-create(
+component(
   name("vs-time"),
   state({
     props: {

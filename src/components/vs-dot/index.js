@@ -1,8 +1,8 @@
-import create from "../../create";
+import component from "../component";
 import { hyper } from "../../hyper";
 import { render, name, state } from "../../utils";
 
-create(
+component(
   name("vs-dot"),
   state({ props: { size: 16, x: 0, y: 0, children: null } }),
   render(

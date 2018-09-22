@@ -1,8 +1,8 @@
-import create from "../../create";
+import component from "../component";
 import { render, name, state } from "../../utils";
 import classes from "./index.css";
 
-create(
+component(
   name("vs-text"),
   state("Put some text here."),
   render((element, state) => {

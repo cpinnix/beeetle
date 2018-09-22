@@ -1,9 +1,9 @@
-import create from "../../create";
+import component from "../component";
 import { hyper } from "../../hyper";
 import { render, name, state, componentShouldRender } from "../../utils";
 import "../vs-dot";
 
-create(
+component(
   name("vs-sierpinski-triangle"),
   state({
     props: {

@@ -1,9 +1,9 @@
-import create from "../../create";
+import component from "../component";
 import { vue } from "../../vue";
 import { render, name, state } from "../../utils";
 import "../vs-text";
 
-create(
+component(
   name("vs-vue"),
   state({
     actions: {

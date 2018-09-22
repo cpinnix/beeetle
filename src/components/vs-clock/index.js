@@ -1,10 +1,10 @@
-import create from "../../create";
+import component from "../component";
 import { hyper } from "../../hyper";
 import { render, name, state } from "../../utils";
 import "../vs-time";
 import "../vs-text";
 
-create(
+component(
   name("vs-clock"),
   state({
     i18n: {

@@ -5,7 +5,7 @@ import {
   mount,
   unmount,
   componentDidCreate
-} from "./utils";
+} from "../utils";
 
 const didCreate = component =>
   console.log(["Created", component.name].join(" | "));
