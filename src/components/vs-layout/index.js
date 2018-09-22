@@ -1,5 +1,5 @@
 import component from "../component";
-import { raw, name, state } from "../../utils";
+import { render, name, state } from "../../lib";
 
 component(
   name("vs-layout"),
@@ -9,7 +9,7 @@ component(
       right: null
     }
   }),
-  raw((element, { props: { left, right } }) => {
+  render((element, { props: { left, right } }) => {
     element.innerHTML = `
       <div>
         <div class="left"></div>

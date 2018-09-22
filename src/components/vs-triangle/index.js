@@ -1,5 +1,5 @@
 import component from "../component";
-import { render, name, state, componentDidMount } from "../../utils";
+import { render, name, state, componentDidMount } from "../../lib";
 import "../vs-sierpinski-triangle";
 
 component(
@@ -16,7 +16,7 @@ component(
     let triangle = null;
 
     if (element.innerHTML === "") {
-      triangle = document.componentElement("vs-sierpinski-triangle");
+      triangle = document.createElement("vs-sierpinski-triangle");
       element.appendChild(triangle);
     } else {
       triangle = element.children[0];

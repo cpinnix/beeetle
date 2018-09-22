@@ -1,7 +1,7 @@
 import moment from "moment";
 import component from "../component";
-import { hyper } from "../../hyper";
-import { render, name, state, componentDidMount } from "../../utils";
+import { hyper } from "../../renderers";
+import { render, name, state, componentDidMount } from "../../lib";
 import classes from "./index.css";
 import "../vs-text";
 
@@ -19,13 +19,7 @@ component(
       (wire, { props: { time } }) => wire()`
       <vs-text
         class=${classes.time}
-        state=${state => ({
-          ...state,
-          props: {
-            ...state.props,
-            text: time
-          }
-        })}
+        state=${state => time}
       >
       </vs-text>
     `

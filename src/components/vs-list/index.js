@@ -1,5 +1,6 @@
 import component from "../component";
-import { hyper, name, state } from "../../utils";
+import { hyper } from "../../renderers";
+import { name, state, render } from "../../lib";
 
 component(
   name("vs-list"),
@@ -8,7 +9,9 @@ component(
       items: []
     }
   }),
-  hyper((wire, { props: { items } }) =>
-    items.map(({ id }) => wire(id)`<div>${id}</div>`)
+  render(
+    hyper((wire, { props: { items } }) =>
+      items.map(({ id }) => wire(id)`<div>${id}</div>`)
+    )
   )
 );

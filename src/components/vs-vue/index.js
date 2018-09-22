@@ -1,6 +1,6 @@
 import component from "../component";
-import { vue } from "../../vue";
-import { render, name, state } from "../../utils";
+import { vue } from "../../renderers";
+import { render, name, state } from "../../lib";
 import "../vs-text";
 
 component(
@@ -11,8 +11,8 @@ component(
     }
   }),
   render(
-    vue(({ actions: { click } }) => h => {
-      return h("div", [
+    vue(({ actions: { click } }) => h =>
+      h("div", [
         h(
           "button",
           {
@@ -28,7 +28,7 @@ component(
             })
           ]
         )
-      ]);
-    })
+      ])
+    )
   )
 );

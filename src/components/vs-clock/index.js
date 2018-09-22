@@ -1,6 +1,6 @@
 import component from "../component";
-import { hyper } from "../../hyper";
-import { render, name, state } from "../../utils";
+import { hyper } from "../../renderers";
+import { render, name, state } from "../../lib";
 import "../vs-time";
 import "../vs-text";
 
@@ -20,13 +20,7 @@ component(
       (wire, { i18n: { TEXT } }) => wire()`
       <div>
         <vs-text
-          state=${state => ({
-            ...state,
-            props: {
-              ...state.props,
-              text: TEXT
-            }
-          })}
+          state=${state => TEXT}
         >
         </vs-text>
         <vs-time></vs-time>

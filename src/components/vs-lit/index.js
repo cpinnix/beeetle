@@ -1,6 +1,6 @@
 import component from "../component";
-import { lit } from "../../lit";
-import { render, name, state } from "../../utils";
+import { lit } from "../../renderers";
+import { render, name, state } from "../../lib";
 import "../vs-text";
 
 component(

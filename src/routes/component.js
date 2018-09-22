@@ -1,4 +1,4 @@
-import { pipe, create, mount } from "../utils";
+import { pipe, create, mount } from "../lib";
 
 const component = (...plugins) => pipe(...plugins, mount, create)({});
 

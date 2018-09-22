@@ -1,5 +1,5 @@
 import component from "../component";
-import { raw, name, state, componentDidMount } from "../../utils";
+import { raw, name, state, componentDidMount } from "../../lib";
 
 component(
   name("vs-provider"),

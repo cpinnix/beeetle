@@ -1,6 +1,6 @@
 import component from "../component";
-import { hyper } from "../../hyper";
-import { render, name, state } from "../../utils";
+import { hyper } from "../../renderers";
+import { render, name, state } from "../../lib";
 
 component(
   name("vs-dot"),

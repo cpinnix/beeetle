@@ -1,5 +1,5 @@
 import component from "../component";
-import { render, name, state } from "../../utils";
+import { render, name, state } from "../../lib";
 import classes from "./index.css";
 
 component(
@@ -7,6 +7,6 @@ component(
   state("Put some text here."),
   render((element, state) => {
     element.textContent = state;
-    element.className = classes.text;
+    element.classList.add(classes.text);
   })
 );
