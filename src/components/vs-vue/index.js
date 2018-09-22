@@ -23,10 +23,7 @@ create(
           [
             h("vs-text", {
               domProps: {
-                state: state => ({
-                  ...state,
-                  props: { ...state.props, text: "Hello" }
-                })
+                state: state => "Hello"
               }
             })
           ]

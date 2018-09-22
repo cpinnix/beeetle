@@ -14,14 +14,7 @@ create(
     hyper((wire, { actions: { click } }) => {
       return wire()`
       <button onclick=${click}>
-        <vs-text state=${state => ({
-          ...state,
-          props: {
-            ...state.props,
-            text: "Hello"
-          }
-        })}
-        >
+        <vs-text state=${state => "Hello"}>
         </vs-text>
       </button>
     `;

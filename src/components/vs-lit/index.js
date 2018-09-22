@@ -13,12 +13,7 @@ create(
   render(
     lit(
       (html, { props: { message } }) =>
-        html`<vs-text
-          .state=${state => ({
-            ...state,
-            props: { ...state.props, text: message }
-          })}>
-        ></vs-text>`
+        html`<vs-text .state=${state => message}></vs-text>`
     )
   )
 );

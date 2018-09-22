@@ -12,11 +12,7 @@ component(
     hyper(
       wire => wire()`
       <div>
-        <vs-text state=${state => ({
-          ...state,
-          props: { ...state.props, text: "Home" }
-        })}
-        >
+        <vs-text state=${state => "Home"}>
         </vs-text>
       </div>
       <vs-button></vs-button>
