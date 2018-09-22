@@ -1,7 +1,7 @@
 import moment from "moment";
 import create from "../../create";
 import { hyper } from "../../hyper";
-import { render, name, state, didMount } from "../../utils";
+import { render, name, state, componentDidMount } from "../../utils";
 import classes from "./index.css";
 import "../vs-text";
 
@@ -31,7 +31,7 @@ create(
     `
     )
   ),
-  didMount(({ update }) => {
+  componentDidMount(({ update }) => {
     setInterval(
       () =>
         update(state => ({

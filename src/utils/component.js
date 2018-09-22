@@ -32,4 +32,6 @@ export const component = base => {
   }
 
   customElements.define(base.name, Base);
+
+  when(base.componentDidCreate, () => base.componentDidCreate(base));
 };

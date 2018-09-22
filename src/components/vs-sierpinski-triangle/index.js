@@ -1,6 +1,6 @@
 import create from "../../create";
 import { hyper } from "../../hyper";
-import { render, name, state, shouldRender } from "../../utils";
+import { render, name, state, componentShouldRender } from "../../utils";
 import "../vs-dot";
 
 create(
@@ -58,7 +58,7 @@ create(
     `;
     })
   ),
-  shouldRender((prevState, nextState) => {
+  componentShouldRender((prevState, nextState) => {
     const prevProps = prevState.props;
     const nextProps = nextState.props;
     const o = prevProps;

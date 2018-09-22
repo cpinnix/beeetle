@@ -13,8 +13,8 @@ export const update = _ => ({
     const nextState = nextComponent.state;
 
     when(nextComponent.element, () => {
-      if (nextComponent.shouldRender) {
-        if (nextComponent.shouldRender(prevState, nextState)) {
+      if (nextComponent.componentShouldRender) {
+        if (nextComponent.componentShouldRender(prevState, nextState)) {
           nextComponent.render(nextComponent);
         }
       } else {

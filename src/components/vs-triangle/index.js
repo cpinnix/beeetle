@@ -1,5 +1,5 @@
 import create from "../../create";
-import { render, name, state, didMount } from "../../utils";
+import { render, name, state, componentDidMount } from "../../utils";
 import "../vs-sierpinski-triangle";
 
 create(
@@ -47,7 +47,7 @@ create(
       }
     });
   }),
-  didMount(({ update }) => {
+  componentDidMount(({ update }) => {
     const tick = () => {
       update(state => {
         const elapsed = new Date().getTime() - state.props.start;
