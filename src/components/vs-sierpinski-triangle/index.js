@@ -1,5 +1,6 @@
 import create from "../../create";
-import { hyper, name, state, shouldRender } from "../../utils";
+import { hyper } from "../../hyper";
+import { render, name, state, shouldRender } from "../../utils";
 import "../vs-dot";
 
 create(
@@ -11,13 +12,14 @@ create(
       s: 16
     }
   }),
-  hyper((wire, { props: { x, y, s, children } }) => {
-    const targetSize = 25;
+  render(
+    hyper((wire, { props: { x, y, s, children } }) => {
+      const targetSize = 25;
 
-    let ns = s;
+      let ns = s;
 
-    if (s <= targetSize) {
-      return wire()`
+      if (s <= targetSize) {
+        return wire()`
         <vs-dot
           state=${state => ({
             ...state,
@@ -30,11 +32,11 @@ create(
           })}
         ></vs-dot>
       `;
-    }
+      }
 
-    ns /= 2;
+      ns /= 2;
 
-    return wire()`
+      return wire()`
       <vs-sierpinski-triangle
         state=${state => ({
           ...state,
@@ -54,7 +56,8 @@ create(
         })}
       ></vs-sierpinski-triangle>
     `;
-  }),
+    })
+  ),
   shouldRender((prevState, nextState) => {
     const prevProps = prevState.props;
     const nextProps = nextState.props;

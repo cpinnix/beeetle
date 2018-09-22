@@ -1,5 +1,6 @@
 import create from "../../create";
-import { hyper, name, state } from "../../utils";
+import { hyper } from "../../hyper";
+import { render, name, state } from "../../utils";
 import "../vs-time";
 import "../vs-text";
 
@@ -14,8 +15,9 @@ create(
       loaded: true
     }
   }),
-  hyper(
-    (wire, { i18n: { TEXT } }) => wire()`
+  render(
+    hyper(
+      (wire, { i18n: { TEXT } }) => wire()`
       <div>
         <vs-text
           state=${state => ({
@@ -30,5 +32,6 @@ create(
         <vs-time></vs-time>
       </div>
     `
+    )
   )
 );

@@ -1,6 +1,7 @@
 import moment from "moment";
 import create from "../../create";
-import { hyper, name, state, didMount } from "../../utils";
+import { hyper } from "../../hyper";
+import { render, name, state, didMount } from "../../utils";
 import classes from "./index.css";
 import "../vs-text";
 
@@ -13,8 +14,9 @@ create(
       time: getTime()
     }
   }),
-  hyper(
-    (wire, { props: { time } }) => wire()`
+  render(
+    hyper(
+      (wire, { props: { time } }) => wire()`
       <vs-text
         class=${classes.time}
         state=${state => ({
@@ -27,6 +29,7 @@ create(
       >
       </vs-text>
     `
+    )
   ),
   didMount(({ update }) => {
     setInterval(

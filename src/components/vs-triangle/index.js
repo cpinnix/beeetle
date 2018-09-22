@@ -1,5 +1,5 @@
 import create from "../../create";
-import { raw, name, state, didMount } from "../../utils";
+import { render, name, state, didMount } from "../../utils";
 import "../vs-sierpinski-triangle";
 
 create(
@@ -12,7 +12,7 @@ create(
       elapsed: 0
     }
   }),
-  raw((element, { props: { elapsed, seconds, newSeconds } }) => {
+  render((element, { props: { elapsed, seconds, newSeconds } }) => {
     let triangle = null;
 
     if (element.innerHTML === "") {

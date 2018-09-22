@@ -1,5 +1,6 @@
 import create from "../../create";
-import { hyper, name, state } from "../../utils";
+import { hyper } from "../../hyper";
+import { render, name, state } from "../../utils";
 import "../vs-text";
 
 create(
@@ -9,8 +10,9 @@ create(
       click: () => console.log("hello")
     }
   }),
-  hyper((wire, { actions: { click } }) => {
-    return wire()`
+  render(
+    hyper((wire, { actions: { click } }) => {
+      return wire()`
       <button onclick=${click}>
         <vs-text state=${state => ({
           ...state,
@@ -23,5 +25,6 @@ create(
         </vs-text>
       </button>
     `;
-  })
+    })
+  )
 );

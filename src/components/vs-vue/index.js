@@ -1,5 +1,6 @@
 import create from "../../create";
-import { vue, name, state } from "../../utils";
+import { vue } from "../../vue";
+import { render, name, state } from "../../utils";
 import "../vs-text";
 
 create(
@@ -9,26 +10,28 @@ create(
       click: () => console.log("hello")
     }
   }),
-  vue(({ actions: { click } }) => h => {
-    return h("div", [
-      h(
-        "button",
-        {
-          on: {
-            click
-          }
-        },
-        [
-          h("vs-text", {
-            domProps: {
-              state: state => ({
-                ...state,
-                props: { ...state.props, text: "Hello" }
-              })
+  render(
+    vue(({ actions: { click } }) => h => {
+      return h("div", [
+        h(
+          "button",
+          {
+            on: {
+              click
             }
-          })
-        ]
-      )
-    ]);
-  })
+          },
+          [
+            h("vs-text", {
+              domProps: {
+                state: state => ({
+                  ...state,
+                  props: { ...state.props, text: "Hello" }
+                })
+              }
+            })
+          ]
+        )
+      ]);
+    })
+  )
 );

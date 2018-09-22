@@ -15,10 +15,10 @@ export const update = _ => ({
     when(nextComponent.element, () => {
       if (nextComponent.shouldRender) {
         if (nextComponent.shouldRender(prevState, nextState)) {
-          nextComponent.render(nextComponent.element, nextComponent.state);
+          nextComponent.render(nextComponent);
         }
       } else {
-        nextComponent.render(nextComponent.element, nextComponent.state);
+        nextComponent.render(nextComponent);
       }
     });
 

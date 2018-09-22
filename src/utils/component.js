@@ -3,15 +3,12 @@
 import { when } from "./when";
 
 export const component = base => {
-  console.log(base);
-
   class Base extends HTMLElement {
     constructor() {
       super();
 
       this.component = {
-        ...base,
-        state: base.defaultState
+        ...base
       };
 
       when(this.component.update, () => {
