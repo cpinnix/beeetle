@@ -1,5 +1,5 @@
 import {
-  component,
+  create,
   pipe,
   update,
   mount,
@@ -10,14 +10,14 @@ import {
 const didCreate = component =>
   console.log(["Created", component.name].join(" | "));
 
-const create = (...plugins) =>
+const component = (...plugins) =>
   pipe(
     ...plugins,
     mount,
     unmount,
     update,
     componentDidCreate(didCreate),
-    component
+    create
   )({});
 
-export default create;
+export default component;

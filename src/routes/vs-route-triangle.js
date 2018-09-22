@@ -1,9 +1,9 @@
-import create from "../create";
-import { hyper } from "../hyper";
+import component from "./component";
+import { html } from "../html";
 import { name, render } from "../utils";
 import "../components/vs-triangle";
 
-create(
+component(
   name("vs-route-triangle"),
-  render(hyper(wire => wire()`<vs-triangle></vs-triangle>`))
+  render(html(`<vs-triangle></vs-triangle>`))
 );

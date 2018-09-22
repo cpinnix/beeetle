@@ -4,7 +4,7 @@ export * from "./update";
 export * from "./mount";
 export * from "./unmount";
 export * from "./render";
-export * from "./component";
+export * from "./create";
 
 export * from "./pipe";
 

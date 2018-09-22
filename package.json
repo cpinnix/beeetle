@@ -19,6 +19,7 @@
     "@vaadin/router": "^1.1.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "hyperhtml": "2.13.0",
+    "lit-html": "^0.11.4",
     "moment": "^2.22.2",
     "prop-types": "^15.6.2",
     "should-update": "^2.0.0",

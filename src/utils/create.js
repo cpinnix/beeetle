@@ -2,13 +2,13 @@
 
 import { when } from "./when";
 
-export const component = base => {
+export const create = component => {
   class Base extends HTMLElement {
     constructor() {
       super();
 
       this.component = {
-        ...base
+        ...component
       };
 
       when(this.component.update, () => {
@@ -31,7 +31,9 @@ export const component = base => {
     }
   }
 
-  customElements.define(base.name, Base);
+  customElements.define(component.name, Base);
 
-  when(base.componentDidCreate, () => base.componentDidCreate(base));
+  when(component.componentDidCreate, () =>
+    component.componentDidCreate(component)
+  );
 };
