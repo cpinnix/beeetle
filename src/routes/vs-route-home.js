@@ -5,6 +5,7 @@ import "../components/vs-button";
 import "../components/vs-vue";
 import "../components/vs-lit";
 import "../components/vs-text";
+import "../components/vs-react";
 
 component(
   name("vs-route-home"),
@@ -17,6 +18,7 @@ component(
       </div>
       <vs-button></vs-button>
       <vs-vue></vs-vue>
+      <vs-react></vs-react>
       <vs-lit></vs-lit>
     `
     )
