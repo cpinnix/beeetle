@@ -1,49 +1,68 @@
-import create from "../../create";
-import { hyper, name, props, shouldRender } from "../../utils";
+import component from "../component";
+import { hyper } from "../../renderers";
+import { render, name, state, componentShouldRender } from "../../lib";
 import "../vs-dot";
 
-create(
+component(
   name("vs-sierpinski-triangle"),
-  props({
-    x: 0,
-    y: 0,
-    s: 16
+  state({
+    props: {
+      x: 0,
+      y: 0,
+      s: 16
+    }
   }),
-  hyper((wire, { props: { x, y, s, children } }) => {
-    const targetSize = 25;
+  render(
+    hyper((wire, { props: { x, y, s, children } }) => {
+      const targetSize = 25;
 
-    let ns = s;
+      let ns = s;
 
-    if (s <= targetSize) {
-      return wire()`
+      if (s <= targetSize) {
+        return wire()`
         <vs-dot
-          props=${() => ({
-            x: x - targetSize / 2,
-            y: y - targetSize / 2,
-            size: targetSize,
-            children
+          state=${state => ({
+            ...state,
+            props: {
+              x: x - targetSize / 2,
+              y: y - targetSize / 2,
+              size: targetSize,
+              children
+            }
           })}
         ></vs-dot>
       `;
-    }
+      }
 
-    ns /= 2;
+      ns /= 2;
 
-    return wire()`
+      return wire()`
       <vs-sierpinski-triangle
-        props=${() => ({ x, y: y - ns / 2, s: ns, children })}
+        state=${state => ({
+          ...state,
+          props: { ...state.props, x, y: y - ns / 2, s: ns, children }
+        })}
       ></vs-sierpinski-triangle>
       <vs-sierpinski-triangle
-        props=${() => ({ x: x - ns, y: y + ns / 2, s: ns, children })}
+        state=${state => ({
+          ...state,
+          props: { ...state.props, x: x - ns, y: y + ns / 2, s: ns, children }
+        })}
       ></vs-sierpinski-triangle>
       <vs-sierpinski-triangle
-        props=${() => ({ x: x + ns, y: y + ns / 2, s: ns, children })}
+        state=${state => ({
+          ...state,
+          props: { ...state.props, x: x + ns, y: y + ns / 2, s: ns, children }
+        })}
       ></vs-sierpinski-triangle>
     `;
-  }),
-  shouldRender((oldProps, newProps) => {
-    const o = oldProps;
-    const n = newProps;
+    })
+  ),
+  componentShouldRender((prevState, nextState) => {
+    const prevProps = prevState.props;
+    const nextProps = nextState.props;
+    const o = prevProps;
+    const n = nextProps;
     return !(
       o.x === n.x &&
       o.y === n.y &&

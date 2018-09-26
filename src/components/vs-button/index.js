@@ -1,22 +1,23 @@
-import create from "../../create";
-import { hyper, name, actions } from "../../utils";
+import component from "../component";
+import { hyper } from "../../renderers";
+import { render, name, state } from "../../lib";
 import "../vs-text";
 
-create(
+component(
   name("vs-button"),
-  actions({
-    click: () => console.log("hello")
+  state({
+    actions: {
+      click: () => console.log("hello")
+    }
   }),
-  hyper(
-    (wire, { actions: { click } }) => wire()`
+  render(
+    hyper((wire, { actions: { click } }) => {
+      return wire()`
       <button onclick=${click}>
-        <vs-text props=${props => ({
-          ...props,
-          text: "Hello"
-        })}
-        >
+        <vs-text state=${state => "Hello"}>
         </vs-text>
       </button>
-    `
+    `;
+    })
   )
 );

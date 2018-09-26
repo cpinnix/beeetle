@@ -1,16 +1,18 @@
-import create from "../../create";
-import { raw, name, props, didMount } from "../../utils";
+import component from "../component";
+import { render, name, state, componentDidMount } from "../../lib";
 import "../vs-sierpinski-triangle";
 
-create(
+component(
   name("vs-triangle"),
-  props({
-    start: new Date().getTime(),
-    seconds: 0,
-    newSeconds: 0,
-    elapsed: 0
+  state({
+    props: {
+      start: new Date().getTime(),
+      seconds: 0,
+      newSeconds: 0,
+      elapsed: 0
+    }
   }),
-  raw(({ element, props: { elapsed, seconds, newSeconds } }) => {
+  render((element, { props: { elapsed, seconds, newSeconds } }) => {
     let triangle = null;
 
     if (element.innerHTML === "") {
@@ -31,27 +33,33 @@ create(
       transform
     });
 
-    triangle.props = props => ({
-      ...props,
-      x: 0,
-      y: 0,
-      s: 1000,
-      children:
-        newSeconds === seconds
-          ? props.children
-          : ({ element }) => (element.innerHTML = `<div>${seconds}</div>`)
+    triangle.state = state => ({
+      ...state,
+      props: {
+        ...state.props,
+        x: 0,
+        y: 0,
+        s: 1000,
+        children:
+          newSeconds === seconds
+            ? state.props.children
+            : ({ element }) => (element.innerHTML = `<div>${seconds}</div>`)
+      }
     });
   }),
-  didMount(({ updateProps }) => {
+  componentDidMount(({ update }) => {
     const tick = () => {
-      updateProps(props => {
-        const elapsed = new Date().getTime() - props.start;
+      update(state => {
+        const elapsed = new Date().getTime() - state.props.start;
         const newSeconds = Math.floor(elapsed / 1000);
         return {
-          ...props,
-          elapsed,
-          seconds: props.newSeconds,
-          newSeconds
+          ...state,
+          props: {
+            ...state.props,
+            elapsed,
+            seconds: state.props.newSeconds,
+            newSeconds
+          }
         };
       });
       requestAnimationFrame(tick);

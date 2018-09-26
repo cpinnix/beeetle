@@ -1,5 +1,6 @@
-import create from "../create";
-import { name, hyper } from "../utils";
+import component from "./component";
+import { html } from "../renderers";
+import { name, render } from "../lib";
 import "../components/vs-clock";
 
-create(name("vs-route-clock"), hyper(wire => wire()`<vs-clock></vs-clock>`));
+component(name("vs-route-clock"), render(html(`<vs-clock></vs-clock>`)));

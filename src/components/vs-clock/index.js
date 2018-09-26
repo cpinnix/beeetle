@@ -1,28 +1,31 @@
-import create from "../../create";
-import { hyper, name, i18n, attrs } from "../../utils";
+import component from "../component";
+import { hyper } from "../../renderers";
+import { render, name, state } from "../../lib";
 import "../vs-time";
 import "../vs-text";
 
-create(
+component(
   name("vs-clock"),
-  i18n({
-    TEXT: "The current time is ",
-    hello: "world"
+  state({
+    i18n: {
+      TEXT: "The current time is ",
+      hello: "world"
+    },
+    attrs: {
+      loaded: true
+    }
   }),
-  attrs({
-    loaded: true
-  }),
-  hyper(
-    (wire, { i18n: { TEXT } }) => wire()`
+  render(
+    hyper(
+      (wire, { i18n: { TEXT } }) => wire()`
       <div>
         <vs-text
-          props=${() => ({
-            text: TEXT
-          })}
+          state=${state => TEXT}
         >
         </vs-text>
         <vs-time></vs-time>
       </div>
     `
+    )
   )
 );

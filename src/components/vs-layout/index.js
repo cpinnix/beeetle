@@ -1,13 +1,15 @@
-import create from "../../create";
-import { raw, name, props } from "../../utils";
+import component from "../component";
+import { render, name, state } from "../../lib";
 
-create(
+component(
   name("vs-layout"),
-  props({
-    left: null,
-    right: null
+  state({
+    props: {
+      left: null,
+      right: null
+    }
   }),
-  raw(({ element, props: { left, right } }) => {
+  render((element, { props: { left, right } }) => {
     element.innerHTML = `
       <div>
         <div class="left"></div>

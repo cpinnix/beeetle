@@ -1,17 +1,23 @@
-import create from "../../create";
-import { raw, name, props, didMount } from "../../utils";
+import component from "../component";
+import { raw, name, state, componentDidMount } from "../../lib";
 
-create(
+component(
   name("vs-provider"),
-  didMount(({ updateProps }) => {
+  componentDidMount(({ update }) => {
     setTimeout(
-      () => updateProps(props => ({ ...props, items: [{ id: 0 }, { id: 1 }] })),
+      () =>
+        update(state => ({
+          ...state,
+          props: { ...state.props, items: [{ id: 0 }, { id: 1 }] }
+        })),
       1000
     );
   }),
-  props({
-    children: null,
-    items: {}
+  state({
+    props: {
+      children: null,
+      items: {}
+    }
   }),
   raw(state => {
     state.props.children && state.props.children(state);

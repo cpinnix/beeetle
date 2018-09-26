@@ -1,29 +1,34 @@
-import create from "../../create";
-import { vue, name, actions } from "../../utils";
+import component from "../component";
+import { vue } from "../../renderers";
+import { render, name, state } from "../../lib";
 import "../vs-text";
 
-create(
+component(
   name("vs-vue"),
-  actions({
-    click: () => console.log("hello")
+  state({
+    actions: {
+      click: () => console.log("hello")
+    }
   }),
-  vue(({ actions: { click } }) => h => {
-    return h("div", [
-      h(
-        "button",
-        {
-          on: {
-            click
-          }
-        },
-        [
-          h("vs-text", {
-            domProps: {
-              props: props => ({ ...props, text: "Hello" })
+  render(
+    vue(({ actions: { click } }) => h =>
+      h("div", [
+        h(
+          "button",
+          {
+            on: {
+              click
             }
-          })
-        ]
-      )
-    ]);
-  })
+          },
+          [
+            h("vs-text", {
+              domProps: {
+                state: state => "Hello"
+              }
+            })
+          ]
+        )
+      ])
+    )
+  )
 );
