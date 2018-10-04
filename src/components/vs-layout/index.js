@@ -1,3 +1,4 @@
+import { when, T, always } from "ramda";
 import component from "../component";
 import { render, name, state } from "../../lib";
 
@@ -17,11 +18,7 @@ component(
       </div>
     `;
 
-    if (left) {
-      left({ element: element.querySelector(".left") });
-    }
-    if (right) {
-      right({ element: element.querySelector(".right") });
-    }
+    when(T, always(left({ element: element.querySelector(".left") })))(left);
+    when(T, always(right({ element: element.querySelector(".right") })))(right);
   })
 );
