@@ -1,6 +1,6 @@
 /* global HTMLElement */
 
-import { when } from "./when";
+import { when } from "ramda";
 
 export const create = component => {
   class Base extends HTMLElement {
@@ -11,19 +11,26 @@ export const create = component => {
         ...component
       };
 
-      when(this.component.update, () => {
-        Object.defineProperty(this, "state", {
-          get: () => this.component.state,
-          set: fn => {
-            this.component = this.component.update(this.component)(fn);
-          }
-        });
-      });
+      when(
+        component => component.update,
+        () => {
+          Object.defineProperty(this, "state", {
+            get: () => this.component.state,
+            set: fn => {
+              this.component = this.component.update(this.component)(fn);
+            }
+          });
+        }
+      )(this.component);
     }
 
     connectedCallback() {
       this.component.element = this;
-      when(this.component.mount, () => this.component.mount(this.component));
+
+      when(
+        component => component.mount,
+        component => component.mount(component)
+      )(this.component);
     }
 
     disconnectedCallback() {
@@ -33,7 +40,8 @@ export const create = component => {
 
   customElements.define(component.name, Base);
 
-  when(component.componentDidCreate, () =>
-    component.componentDidCreate(component)
-  );
+  when(
+    component => component.componentDidCreate,
+    component => component.componentDidCreate(component)
+  )(component);
 };
