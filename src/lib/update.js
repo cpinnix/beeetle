@@ -1,4 +1,6 @@
-import { when } from "./when";
+import { when, ifElse } from "ramda";
+
+const render = component => component.render(component);
 
 export const update = _ => ({
   ..._,
@@ -12,15 +14,17 @@ export const update = _ => ({
 
     const nextState = nextComponent.state;
 
-    when(nextComponent.element, () => {
-      if (nextComponent.componentShouldRender) {
-        if (nextComponent.componentShouldRender(prevState, nextState)) {
-          nextComponent.render(nextComponent);
-        }
-      } else {
-        nextComponent.render(nextComponent);
-      }
-    });
+    when(
+      component => component.element,
+      ifElse(
+        component => component.componentShouldRender,
+        when(
+          component => component.componentShouldRender(prevState, nextState),
+          render
+        ),
+        render
+      )
+    )(nextComponent);
 
     return nextComponent;
   }
