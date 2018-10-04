@@ -1,15 +1,22 @@
-import { when } from "./when";
+import { when } from "ramda";
 
 export const mount = _ => ({
   ..._,
   mount: component => {
-    when(component.componentDidMount, () => {
-      component.componentDidMount({
-        update: fn => {
-          component = component.update(component)(fn);
-        }
-      });
-    });
-    component.render(component);
+    when(
+      component => component.componentDidMount,
+      component => {
+        component.componentDidMount({
+          update: fn => {
+            component = component.update(component)(fn);
+          }
+        });
+      }
+    )(component);
+
+    when(
+      component => component.render,
+      component => component.render(component)
+    )(component);
   }
 });

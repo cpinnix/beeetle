@@ -1,10 +1,9 @@
-import { when } from "./when";
+import { when } from "ramda";
 
 export const render = fn => _ => ({
   ..._,
-  render: component => {
-    when(component.element, () => {
-      fn(component.element, component.state);
-    });
-  }
+  render: when(
+    component => component.element,
+    component => fn(component.element, component.state)
+  )
 });
