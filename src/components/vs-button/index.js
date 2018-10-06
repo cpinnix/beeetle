@@ -1,5 +1,5 @@
 import component from "../component";
-import { hyper } from "../../renderers";
+import hyper from "../../renderers/hyper";
 import { render, name, state } from "../../lib";
 import "../vs-text";
 
@@ -11,13 +11,13 @@ component(
     }
   }),
   render(
-    hyper((wire, { actions: { click } }) => {
-      return wire()`
+    hyper(
+      (wire, { actions: { click } }) => wire()`
       <button onclick=${click}>
-        <vs-text state=${state => "Hello"}>
+        <vs-text state=${() => "Hello"}>
         </vs-text>
       </button>
-    `;
-    })
+    `
+    )
   )
 );

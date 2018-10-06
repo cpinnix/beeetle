@@ -1,5 +1,5 @@
 import component from "./component";
-import { hyper } from "../renderers";
+import hyper from "../renderers/hyper";
 import { name, render } from "../lib";
 import "../components/vs-button";
 import "../components/vs-vue";

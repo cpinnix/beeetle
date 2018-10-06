@@ -1,23 +1,25 @@
-/* global document */
+/* global document, import */
 
 import { Router } from "@vaadin/router";
-import "./routes/vs-route-home";
-import "./routes/vs-route-clock";
-import "./routes/vs-route-triangle";
 
-const router = new Router(document.getElementById("app"));
+setTimeout(() => {
+  const router = new Router(document.getElementById("root"));
 
-router.setRoutes([
-  {
-    path: "/",
-    component: "vs-route-home"
-  },
-  {
-    path: "/clock",
-    component: "vs-route-clock"
-  },
-  {
-    path: "/triangle",
-    component: "vs-route-triangle"
-  }
-]);
+  router.setRoutes([
+    {
+      path: "/",
+      onBeforeEnter: import(/* webpackChunkName: "vs-route-home" */ "./routes/vs-route-home"),
+      component: "vs-route-home"
+    },
+    {
+      path: "/clock",
+      onBeforeEnter: import(/* webpackChunkName: "vs-route-clock" */ "./routes/vs-route-clock"),
+      component: "vs-route-clock"
+    },
+    {
+      path: "/triangle",
+      onBeforeEnter: import(/* webpackChunkName: "vs-route-triangle" */ "./routes/vs-route-triangle"),
+      component: "vs-route-triangle"
+    }
+  ]);
+}, 1000);

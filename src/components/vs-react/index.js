@@ -1,5 +1,5 @@
 import component from "../component";
-import { react } from "../../renderers";
+import react from "../../renderers/react";
 import { render, name, state } from "../../lib";
 import "../vs-text";
 

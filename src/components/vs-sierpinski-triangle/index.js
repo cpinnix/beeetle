@@ -1,6 +1,6 @@
 import { ifElse } from "ramda";
 import component from "../component";
-import { hyper } from "../../renderers";
+import hyper from "../../renderers/hyper";
 import { render, name, state, componentShouldRender } from "../../lib";
 import "../vs-dot";
 

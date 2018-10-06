@@ -1,5 +1,5 @@
 import component from "../component";
-import { hyper } from "../../renderers";
+import hyper from "../../renderers/hyper";
 import { render, name, state } from "../../lib";
 import "../vs-time";
 import "../vs-text";

@@ -1,11 +1,10 @@
-import moment from "moment";
 import component from "../component";
-import { hyper } from "../../renderers";
+import hyper from "../../renderers/hyper";
 import { render, name, state, componentDidMount } from "../../lib";
 import classes from "./index.css";
 import "../vs-text";
 
-const getTime = () => moment().format("LTS");
+const getTime = () => Date.now();
 
 component(
   name("vs-time"),

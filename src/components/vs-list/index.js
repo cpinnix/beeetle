@@ -1,5 +1,5 @@
 import component from "../component";
-import { hyper } from "../../renderers";
+import hyper from "../../renderers/hyper";
 import { name, state, render } from "../../lib";
 
 component(

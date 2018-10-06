@@ -1,5 +1,5 @@
 import component from "../component";
-import { vue } from "../../renderers";
+import vue from "../../renderers/vue";
 import { render, name, state } from "../../lib";
 import "../vs-text";
 
