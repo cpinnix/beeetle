@@ -19,5 +19,10 @@ router.setRoutes([
     path: "/triangle",
     onBeforeEnter: import(/* webpackChunkName: "vs-route-triangle" */ "./routes/vs-route-triangle"),
     component: "vs-route-triangle"
+  },
+  {
+    path: "/vue",
+    onBeforeEnter: import(/* webpackChunkName: "vs-route-vue" */ "./routes/vs-route-vue"),
+    component: "vs-route-vue"
   }
 ]);
