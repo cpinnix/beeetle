@@ -1,5 +1,7 @@
 import { createElement } from "react";
 
+const dotSize = 4;
+
 export const point = ({ size, x, y, children }) =>
   createElement(
     "div",
@@ -7,11 +9,10 @@ export const point = ({ size, x, y, children }) =>
       style: {
         position: "absolute",
         background: "black",
-        width: size + "px",
-        height: size + "px",
-        left: x + "px",
-        top: y + "px",
-        borderRadius: size / 2 + "px"
+        width: `${dotSize}px`,
+        height: `${dotSize}px`,
+        left: `${x + (size - dotSize) / 2}px`,
+        top: `${y + (size - dotSize) / 2}px`
       }
     },
     children
