@@ -1,6 +1,8 @@
+import { createElement } from "react";
+import ReactDOM from "react-dom";
+import { triangle } from "../re-sierpinski-triangle";
 import component from "../component";
 import { render, name, state, componentDidMount } from "../../lib";
-import "../vs-sierpinski-triangle";
 
 component(
   name("vs-triangle"),
@@ -12,40 +14,27 @@ component(
       elapsed: 0
     }
   }),
-  render((element, { props: { elapsed, seconds, newSeconds } }) => {
-    let triangle = null;
-
-    if (element.innerHTML === "") {
-      triangle = document.createElement("vs-sierpinski-triangle");
-      element.appendChild(triangle);
-    } else {
-      triangle = element.children[0];
-    }
-
+  render((element, { props: { elapsed } }) => {
     const t = (elapsed / 1000) % 10;
     const scale = 1 + (t > 5 ? 10 - t : t) / 10;
-    const transform =
-      "scaleX(" + scale / 2.1 + ") scaleY(0.7) translateZ(0.1px)";
+    const transform = `scaleX(${scale / 2.1}) scaleY(0.7) translateZ(0.1px)`;
 
-    Object.assign(triangle.style, {
+    Object.assign(element.style, {
       position: "absolute",
+      top: "50%",
       left: "50%",
       transform
     });
 
-    triangle.state = state => ({
-      ...state,
-      props: {
-        ...state.props,
+    ReactDOM.render(
+      triangle({
         x: 0,
         y: 0,
         s: 1000,
-        children:
-          newSeconds === seconds
-            ? state.props.children
-            : ({ element }) => (element.innerHTML = `<div>${seconds}</div>`)
-      }
-    });
+        children: createElement("div")
+      }),
+      element
+    );
   }),
   componentDidMount(({ updateState }) => {
     const tick = () => {
