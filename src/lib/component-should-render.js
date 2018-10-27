@@ -1,4 +1,3 @@
-export const componentShouldRender = fn => _ => ({
-  ..._,
+export const componentShouldRender = fn => ({
   componentShouldRender: fn
 });

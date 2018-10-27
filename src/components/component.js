@@ -1,23 +1,19 @@
-import {
-  create,
-  pipe,
-  update,
-  mount,
-  unmount,
-  componentDidCreate
-} from "../lib";
+import { mergeAll } from "ramda";
+import { create, update, mount, unmount, componentDidCreate } from "../lib";
 
 const didCreate = component =>
   console.log(["Created", component.name].join(" | "));
 
-const component = (...plugins) =>
-  pipe(
-    ...plugins,
-    mount,
-    unmount,
-    update,
-    componentDidCreate(didCreate),
-    create
-  )({});
+const component = (...plugins) => {
+  create(
+    mergeAll([
+      ...plugins,
+      mount,
+      unmount,
+      update,
+      componentDidCreate(didCreate)
+    ])
+  );
+};
 
 export default component;

@@ -1,4 +1,3 @@
-export const state = state => _ => ({
-  ..._,
+export const state = state => ({
   state
 });

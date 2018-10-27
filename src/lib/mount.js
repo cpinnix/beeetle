@@ -1,7 +1,6 @@
 import { when } from "ramda";
 
-export const mount = _ => ({
-  ..._,
+export const mount = {
   mount: component => {
     when(
       component => component.componentDidMount,
@@ -19,4 +18,4 @@ export const mount = _ => ({
       component => component.render(component)
     )(component);
   }
-});
+};

@@ -1,4 +1,3 @@
-export const componentDidMount = fn => _ => ({
-  ..._,
+export const componentDidMount = fn => ({
   componentDidMount: fn
 });

@@ -1,4 +1,3 @@
-export const name = name => _ => ({
-  ..._,
+export const name = name => ({
   name
 });

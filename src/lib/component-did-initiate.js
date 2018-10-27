@@ -1,4 +1,3 @@
-export const componentDidInitiate = fn => _ => ({
-  ..._,
+export const componentDidInitiate = fn => ({
   componentDidInitiate: fn
 });

@@ -1,5 +1,8 @@
-import { pipe, create, mount } from "../lib";
+import { mergeAll } from "ramda";
+import { create, mount } from "../lib";
 
-const component = (...plugins) => pipe(...plugins, mount, create)({});
+const component = (...plugins) => {
+  create(mergeAll([...plugins, mount]));
+};
 
 export default component;
