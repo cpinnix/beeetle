@@ -1,5 +1,11 @@
 import { mergeAll } from "ramda";
-import { create, update, mount, unmount, componentDidCreate } from "../lib";
+import {
+  create,
+  updateState,
+  mount,
+  unmount,
+  componentDidCreate
+} from "../lib";
 
 const didCreate = component =>
   console.log(["Created", component.name].join(" | "));
@@ -10,7 +16,7 @@ const component = (...plugins) => {
       ...plugins,
       mount,
       unmount,
-      update,
+      updateState,
       componentDidCreate(didCreate)
     ])
   );

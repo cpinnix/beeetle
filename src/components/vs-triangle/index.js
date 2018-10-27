@@ -47,9 +47,9 @@ component(
       }
     });
   }),
-  componentDidMount(({ update }) => {
+  componentDidMount(({ updateState }) => {
     const tick = () => {
-      update(state => {
+      updateState(state => {
         const elapsed = new Date().getTime() - state.props.start;
         const newSeconds = Math.floor(elapsed / 1000);
         return {

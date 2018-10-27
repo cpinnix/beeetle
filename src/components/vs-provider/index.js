@@ -3,10 +3,10 @@ import { raw, name, state, componentDidMount } from "../../lib";
 
 component(
   name("vs-provider"),
-  componentDidMount(({ update }) => {
+  componentDidMount(({ updateState }) => {
     setTimeout(
       () =>
-        update(state => ({
+        updateState(state => ({
           ...state,
           props: { ...state.props, items: [{ id: 0 }, { id: 1 }] }
         })),

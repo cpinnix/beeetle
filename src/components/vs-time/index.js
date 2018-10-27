@@ -24,10 +24,10 @@ component(
     `
     )
   ),
-  componentDidMount(({ update }) => {
+  componentDidMount(({ updateState }) => {
     setInterval(
       () =>
-        update(state => ({
+        updateState(state => ({
           ...state,
           props: {
             ...state.props,

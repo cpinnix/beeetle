@@ -6,8 +6,8 @@ export const mount = {
       component => component.componentDidMount,
       component => {
         component.componentDidMount({
-          update: fn => {
-            component = component.update(component)(fn);
+          updateState: fn => {
+            component = component.updateState(component)(fn);
           }
         });
       }

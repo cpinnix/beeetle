@@ -12,12 +12,12 @@ export const create = component => {
       };
 
       when(
-        component => component.update,
+        component => component.updateState,
         () => {
           Object.defineProperty(this, "state", {
             get: () => this.component.state,
             set: fn => {
-              this.component = this.component.update(this.component)(fn);
+              this.component = this.component.updateState(this.component)(fn);
             }
           });
         }

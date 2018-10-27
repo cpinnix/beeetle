@@ -2,8 +2,8 @@ import { when, ifElse } from "ramda";
 
 const render = component => component.render(component);
 
-export const update = {
-  update: prevComponent => fn => {
+export const updateState = {
+  updateState: prevComponent => fn => {
     const prevState = prevComponent.state;
 
     const nextComponent = {
