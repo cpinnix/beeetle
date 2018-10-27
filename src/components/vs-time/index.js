@@ -8,33 +8,19 @@ const getTime = () => Date.now();
 
 component(
   name("vs-time"),
-  state({
-    props: {
-      time: getTime()
-    }
-  }),
+  state(getTime()),
   render(
     hyper(
-      (wire, { props: { time } }) => wire()`
+      (wire, time) => wire()`
       <vs-text
         class=${classes.time}
-        state=${state => time}
+        state=${time}
       >
       </vs-text>
     `
     )
   ),
   componentDidMount(({ updateState }) => {
-    setInterval(
-      () =>
-        updateState(state => ({
-          ...state,
-          props: {
-            ...state.props,
-            time: getTime()
-          }
-        })),
-      1000
-    );
+    setInterval(() => updateState(getTime()), 1000);
   })
 );

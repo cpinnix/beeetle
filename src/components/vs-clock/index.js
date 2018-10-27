@@ -20,7 +20,7 @@ component(
       (wire, { i18n: { TEXT } }) => wire()`
       <div>
         <vs-text
-          state=${state => TEXT}
+          state=${TEXT}
         >
         </vs-text>
         <vs-time></vs-time>

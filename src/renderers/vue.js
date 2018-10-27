@@ -1,10 +1,10 @@
 import Vue from "vue";
 
-const vue = fn => (element, state) => {
+const vue = fn => (element, state, actions) => {
   new Vue({
     el: element,
     data: state,
-    render: fn(state)
+    render: fn(state, actions)
   });
 };
 

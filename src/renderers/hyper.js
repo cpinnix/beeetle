@@ -1,7 +1,7 @@
 import { bind, wire } from "hyperhtml";
 
-const hyper = fn => (element, state) => {
-  bind(element)`${fn(wire, state)}`;
+const hyper = fn => (element, ...rest) => {
+  bind(element)`${fn(wire, ...rest)}`;
 };
 
 export default hyper;

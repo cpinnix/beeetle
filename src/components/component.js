@@ -2,6 +2,7 @@ import { mergeAll } from "ramda";
 import {
   create,
   updateState,
+  updateActions,
   mount,
   unmount,
   componentDidCreate
@@ -17,6 +18,7 @@ const component = (...plugins) => {
       mount,
       unmount,
       updateState,
+      updateActions,
       componentDidCreate(didCreate)
     ])
   );

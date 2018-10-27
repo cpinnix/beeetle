@@ -5,8 +5,8 @@ import classes from "./index.css";
 component(
   name("vs-text"),
   state("Put some text here."),
-  render((element, state) => {
-    element.textContent = state;
+  render((element, text) => {
+    element.textContent = text;
     element.classList.add(classes.text);
   })
 );

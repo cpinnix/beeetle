@@ -22,6 +22,18 @@ export const create = component => {
           });
         }
       )(this.component);
+
+      when(
+        component => component.updateActions,
+        () => {
+          Object.defineProperty(this, "actions", {
+            get: () => this.component.actions,
+            set: fn => {
+              this.component = this.component.updateActions(this.component)(fn);
+            }
+          });
+        }
+      )(this.component);
     }
 
     connectedCallback() {

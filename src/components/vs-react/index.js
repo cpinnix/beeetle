@@ -1,17 +1,15 @@
 import component from "../component";
 import react from "../../renderers/react";
-import { render, name, state } from "../../lib";
+import { render, name, actions } from "../../lib";
 import "../vs-text";
 
 component(
   name("vs-react"),
-  state({
-    actions: {
-      click: () => console.log("hello")
-    }
+  actions({
+    click: () => console.log("hello")
   }),
   render(
-    react(({ actions: { click } }) => h =>
+    react((_, { click }) => h =>
       h(
         "div",
         null,
@@ -24,7 +22,7 @@ component(
           },
           h("vs-text", {
             ref: r => {
-              r.state = () => "Hello";
+              r.state = "React Button";
             }
           })
         )

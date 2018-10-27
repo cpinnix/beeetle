@@ -1,17 +1,15 @@
 import component from "../component";
 import vue from "../../renderers/vue";
-import { render, name, state } from "../../lib";
+import { render, name, actions } from "../../lib";
 import "../vs-text";
 
 component(
   name("vs-vue"),
-  state({
-    actions: {
-      click: () => console.log("hello")
-    }
+  actions({
+    click: () => console.log("hello")
   }),
   render(
-    vue(({ actions: { click } }) => h =>
+    vue((_, { click }) => h =>
       h("div", [
         h(
           "button",
@@ -23,7 +21,7 @@ component(
           [
             h("vs-text", {
               domProps: {
-                state: state => "Hello"
+                state: "Vue Button"
               }
             })
           ]

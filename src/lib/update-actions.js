@@ -3,13 +3,13 @@ import { when, is, ifElse } from "ramda";
 const render = component => component.render(component);
 
 const updateComponentWith = component =>
-  ifElse(v => is(Function, v), v => v(component.state), v => v);
+  ifElse(v => is(Function, v), v => v(component.actions), v => v);
 
-export const updateState = {
-  updateState: prevComponent => updater => {
+export const updateActions = {
+  updateActions: prevComponent => updater => {
     const nextComponent = {
       ...prevComponent,
-      state: updateComponentWith(prevComponent)(updater)
+      actions: updateComponentWith(prevComponent)(updater)
     };
 
     when(component => component.element, render)(nextComponent);
