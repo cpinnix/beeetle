@@ -1,6 +1,15 @@
 import component from "./component";
-import { html } from "../renderers";
-import { name, render } from "../lib";
+import hyper from "../renderers/hyper";
+import { name, render } from "../beeetle";
 import "../components/vs-clock";
 
-component(name("vs-route-clock"), render(html(`<vs-clock></vs-clock>`)));
+component(
+  name("vs-route-clock"),
+  render(
+    hyper(
+      wire => wire()`
+      <vs-clock></vs-clock>
+    `
+    )
+  )
+);

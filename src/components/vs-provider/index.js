@@ -1,5 +1,5 @@
 import component from "../component";
-import { raw, name, state, componentDidMount } from "../../lib";
+import { raw, name, state, componentDidMount } from "../../beeetle";
 
 component(
   name("vs-provider"),

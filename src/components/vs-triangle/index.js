@@ -2,7 +2,7 @@ import { createElement } from "react";
 import ReactDOM from "react-dom";
 import { triangle } from "../re-sierpinski-triangle";
 import component from "../component";
-import { render, name, state, componentDidMount } from "../../lib";
+import { render, name, state, componentDidMount } from "../../beeetle";
 
 component(
   name("vs-triangle"),

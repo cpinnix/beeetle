@@ -6,7 +6,7 @@ import {
   mount,
   unmount,
   componentDidCreate
-} from "../lib";
+} from "../beeetle";
 
 const didCreate = component =>
   console.log(["Created", component.name].join(" | "));

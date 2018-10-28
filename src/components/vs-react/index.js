@@ -1,6 +1,6 @@
 import component from "../component";
 import react from "../../renderers/react";
-import { render, name, actions } from "../../lib";
+import { render, name, actions } from "../../beeetle";
 import "../vs-text";
 
 component(

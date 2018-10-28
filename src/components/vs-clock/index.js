@@ -1,6 +1,6 @@
 import component from "../component";
 import hyper from "../../renderers/hyper";
-import { render, name, state } from "../../lib";
+import { render, name, state } from "../../beeetle";
 import "../vs-time";
 import "../vs-text";
 

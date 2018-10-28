@@ -11,6 +11,11 @@ export const create = component => {
         ...component
       };
 
+      this.read = () => this.component;
+      this.write = n => {
+        this.component = n;
+      };
+
       when(
         component => component.updateState,
         () => {
@@ -37,16 +42,27 @@ export const create = component => {
     }
 
     connectedCallback() {
+      console.log("connect");
       this.component.element = this;
 
+      const componentReader = () => this.component;
+      const componentWriter = newComponent => {
+        this.component = newComponent;
+      };
+
       when(
-        component => component.mount,
-        component => component.mount(component)
-      )(this.component);
+        componentReader => componentReader().mount,
+        componentReader =>
+          componentReader().mount(componentReader, componentWriter)
+      )(componentReader);
     }
 
     disconnectedCallback() {
-      this.component.unmount && this.component.unmount(this.component);
+      console.log("disconnect");
+
+      when(({ read }) => read().unmount, ({ read }) => read().unmount(read))(
+        this
+      );
     }
   }
 

@@ -1,6 +1,6 @@
 import component from "../component";
 import vue from "../../renderers/vue";
-import { render, name, actions } from "../../lib";
+import { render, name, actions } from "../../beeetle";
 import "../vs-text";
 
 component(

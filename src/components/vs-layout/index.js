@@ -1,6 +1,6 @@
 import { when, T, always } from "ramda";
 import component from "../component";
-import { render, name, state } from "../../lib";
+import { render, name, state } from "../../beeetle";
 
 component(
   name("vs-layout"),

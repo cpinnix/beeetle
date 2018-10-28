@@ -1,6 +1,6 @@
 import component from "../component";
 import hyper from "../../renderers/hyper";
-import { name, state, render } from "../../lib";
+import { name, state, render } from "../../beeetle";
 
 component(
   name("vs-list"),

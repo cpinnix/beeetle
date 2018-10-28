@@ -1,5 +1,5 @@
 import component from "../component";
-import { render, name, state } from "../../lib";
+import { render, name, state } from "../../beeetle";
 import classes from "./index.css";
 
 component(

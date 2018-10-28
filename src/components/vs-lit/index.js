@@ -1,6 +1,6 @@
 import component from "../component";
 import lit from "../../renderers/lit";
-import { render, name, state } from "../../lib";
+import { render, name, state } from "../../beeetle";
 import "../vs-text";
 
 component(

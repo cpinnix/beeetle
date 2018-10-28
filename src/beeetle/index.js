@@ -11,4 +11,5 @@ export * from "./create";
 export * from "./component-did-create";
 export * from "./component-did-initiate";
 export * from "./component-did-mount";
+export * from "./component-did-unmount";
 export * from "./component-should-render";

@@ -1,1 +1,3 @@
-export const html = str => element => (element.innerHTML = str);
+export const html = str => element => {
+  element.innerHTML = str;
+};

@@ -1,28 +1,31 @@
 /* global document, import */
 
-import { Router } from "@vaadin/router";
+import "./components/vs-header";
+import { router, mount } from "./router";
 
-const router = new Router(document.getElementById("root"));
-
-router.setRoutes([
-  {
-    path: "/",
-    onBeforeEnter: import(/* webpackChunkName: "vs-route-home" */ "./routes/vs-route-home"),
-    component: "vs-route-home"
-  },
-  {
-    path: "/clock",
-    onBeforeEnter: import(/* webpackChunkName: "vs-route-clock" */ "./routes/vs-route-clock"),
-    component: "vs-route-clock"
-  },
-  {
-    path: "/triangle",
-    onBeforeEnter: import(/* webpackChunkName: "vs-route-triangle" */ "./routes/vs-route-triangle"),
-    component: "vs-route-triangle"
-  },
-  {
-    path: "/vue",
-    onBeforeEnter: import(/* webpackChunkName: "vs-route-vue" */ "./routes/vs-route-vue"),
-    component: "vs-route-vue"
-  }
-]);
+router
+  .on("/", mount("vs-route-home"), {
+    before: done =>
+      import(/* webpackChunkName: "vs-route-home" */ "./routes/vs-route-home").then(
+        () => done()
+      )
+  })
+  .on("/clock", mount("vs-route-clock"), {
+    before: done =>
+      import(/* webpackChunkName: "vs-route-clock" */ "./routes/vs-route-clock").then(
+        () => done()
+      )
+  })
+  .on("/triangle", mount("vs-route-triangle"), {
+    before: done =>
+      import(/* webpackChunkName: "vs-route-triangle" */ "./routes/vs-route-triangle").then(
+        () => done()
+      )
+  })
+  .on("/vue", mount("vs-route-vue"), {
+    before: done =>
+      import(/* webpackChunkName: "vs-route-vue" */ "./routes/vs-route-vue").then(
+        () => done()
+      )
+  })
+  .resolve();
