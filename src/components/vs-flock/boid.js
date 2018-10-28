@@ -1,6 +1,6 @@
 import Vector from "./vector";
 import Box from "./box";
-import Point from "./point";
+import point from "./point/point";
 
 export default class Boid {
   constructor(opts) {
@@ -11,7 +11,7 @@ export default class Boid {
     this.velocityLimit = opts.velocityLimit || 2.5;
     this.accelerationLimit = opts.accelerationLimit || 0.5;
 
-    //forces
+    // forces
     this.cohesionAOE = this.opts.cohesionAOE || 20;
     this.separationAOE = this.opts.separationAOE || 8;
     this.alignmentAOE = this.opts.cohesionAOE || 20;
@@ -87,8 +87,8 @@ export default class Boid {
 
   getNeighbors(aoe, position, quadtree) {
     const aoeRange = new Box(
-      new Point(position.x - aoe, position.y - aoe),
-      new Point(position.x + aoe, position.y + aoe)
+      point(position.x - aoe, position.y - aoe),
+      point(position.x + aoe, position.y + aoe)
     );
     let neighbors = quadtree.queryRange(aoeRange);
 

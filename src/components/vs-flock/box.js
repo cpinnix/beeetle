@@ -1,4 +1,6 @@
-import { point, lte, gte } from "./point";
+import point from "./point/point";
+import lte from "./point/lte";
+import gte from "./point/gte";
 
 export default class Box {
   constructor(least, greatest) {

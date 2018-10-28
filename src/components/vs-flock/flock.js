@@ -2,7 +2,7 @@ import Vector from "./vector";
 // import BoxPoint from "./boxPoint";
 import Quadtree from "./quadtree";
 import Box from "./box";
-import { point } from "./point";
+import point from "./point/point";
 
 export default class Flock {
   constructor(population, originX, originY, width, height) {

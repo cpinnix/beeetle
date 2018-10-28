@@ -1,5 +1,5 @@
 import "./box";
-import { equals } from "./point";
+import equals from "./point/equals";
 
 export default class Quadtree {
   constructor(box, max, max_level, level) {
