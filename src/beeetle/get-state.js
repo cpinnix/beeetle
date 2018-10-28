@@ -1,3 +1,3 @@
 export const getState = {
-  getState: i => () => i.read().state
+  getState: element => () => element.read().state
 };

@@ -1,26 +1,33 @@
 /* global HTMLElement */
 
-// i = Component Interface
-
 import { when } from "ramda";
 
 const connectState = element =>
   Object.defineProperty(element, "state", {
-    get: () => when(i => i.read().getState, i => i.read().getState(i))(element),
+    get: () =>
+      when(
+        element => element.read().getState,
+        element => element.read().getState(element)
+      )(element),
     set: state =>
-      when(i => i.read().updateState, i => i.read().updateState(i)(state))(
-        element
-      )
+      when(
+        element => element.read().updateState,
+        element => element.read().updateState(element)(state)
+      )(element)
   });
 
 const connectActions = element =>
   Object.defineProperty(element, "actions", {
     get: () =>
-      when(i => i.read().getActions, i => i.read().getActions(i))(element),
+      when(
+        element => element.read().getActions,
+        element => element.read().getActions(element)
+      )(element),
     set: state =>
-      when(i => i.read().updateActions, i => i.read().updateActions(i)(state))(
-        element
-      )
+      when(
+        element => element.read().updateActions,
+        element => element.read().updateActions(element)(state)
+      )(element)
   });
 
 const init = (element, component) => {
@@ -39,11 +46,17 @@ const init = (element, component) => {
 
 const connected = element => {
   element.component.element = element;
-  when(i => i.read().mount, i => i.read().mount(i))(element);
+  when(
+    element => element.read().mount,
+    element => element.read().mount(element)
+  )(element);
 };
 
 const disconnected = element => {
-  when(i => i.read().unmount, i => i.read().unmount(i))(element);
+  when(
+    element => element.read().unmount,
+    element => element.read().unmount(element)
+  )(element);
 };
 
 export const create = component => {

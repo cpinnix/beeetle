@@ -1,6 +1,6 @@
 import { pipe, when } from "ramda";
 
-const read = i => i.read();
+const read = element => element.read();
 
 export const render = fn => ({
   render: pipe(

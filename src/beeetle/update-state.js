@@ -1,15 +1,16 @@
-// i = Component Interface
-
 import { when } from "ramda";
 
-const render = when(i => i.read().render, i => i.read().render(i));
+const render = when(
+  element => element.read().render,
+  element => element.read().render(element)
+);
 
 export const updateState = {
-  updateState: i => state => {
-    i.write({
-      ...i.read(),
+  updateState: element => state => {
+    element.write({
+      ...element.read(),
       state
     });
-    render(i);
+    render(element);
   }
 };
