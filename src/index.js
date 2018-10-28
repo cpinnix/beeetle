@@ -32,4 +32,10 @@ router
         () => done()
       )
   })
+  .on("/lit", mount("vs-route-lit"), {
+    before: done =>
+      import(/* webpackChunkName: "vs-route-lit" */ "./routes/vs-route-lit").then(
+        () => done()
+      )
+  })
   .resolve();

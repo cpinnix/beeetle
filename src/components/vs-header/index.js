@@ -29,6 +29,9 @@ component(
             <a onclick=${() => navigate("/vue")}><vs-text state=${"Vue"} /></a>
           </li>
           <li>
+            <a onclick=${() => navigate("/lit")}><vs-text state=${"Lit"} /></a>
+          </li>
+          <li>
             <a href="/report" target="_blank"><vs-text state=${"Report"} /></a>
           </li>
         </ul>
