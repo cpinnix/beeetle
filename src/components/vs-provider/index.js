@@ -3,10 +3,10 @@ import { raw, name, state, componentDidMount } from "../../beeetle";
 
 component(
   name("vs-provider"),
-  componentDidMount(({ updateState }) => {
+  componentDidMount(({ setState }) => {
     setTimeout(
       () =>
-        updateState(state => ({
+        setState(state => ({
           ...state,
           props: { ...state.props, items: [{ id: 0 }, { id: 1 }] }
         })),

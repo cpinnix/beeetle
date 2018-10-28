@@ -5,8 +5,8 @@ const render = when(
   element => element.read().render(element)
 );
 
-export const updateActions = {
-  updateActions: element => actions => {
+export const setActions = {
+  setActions: element => actions => {
     element.write({
       ...element.read(),
       actions

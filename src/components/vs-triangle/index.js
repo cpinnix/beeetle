@@ -36,11 +36,11 @@ component(
       element
     );
   }),
-  componentDidMount(({ getState, updateState }) => {
+  componentDidMount(({ getState, setState }) => {
     const tick = () => {
       const elapsed = new Date().getTime() - getState().props.start;
       const newSeconds = Math.floor(elapsed / 1000);
-      updateState({
+      setState({
         ...getState(),
         props: {
           ...getState().props,

@@ -5,8 +5,8 @@ const render = when(
   element => element.read().render(element)
 );
 
-export const updateState = {
-  updateState: element => state => {
+export const setState = {
+  setState: element => state => {
     element.write({
       ...element.read(),
       state

@@ -37,12 +37,12 @@ component(
     `
     )
   ),
-  componentDidMount(({ getState, updateState }) => {
-    const update = () => updateState({ ...getState(), time: getTime() });
+  componentDidMount(({ getState, setState }) => {
+    const update = () => setState({ ...getState(), time: getTime() });
 
     const t = timer(update);
 
-    updateState({ ...getState(), timer: t });
+    setState({ ...getState(), timer: t });
 
     t.start();
   }),

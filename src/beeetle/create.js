@@ -11,8 +11,8 @@ const connectState = element =>
       )(element),
     set: state =>
       when(
-        element => element.read().updateState,
-        element => element.read().updateState(element)(state)
+        element => element.read().setState,
+        element => element.read().setState(element)(state)
       )(element)
   });
 
@@ -25,8 +25,8 @@ const connectActions = element =>
       )(element),
     set: state =>
       when(
-        element => element.read().updateActions,
-        element => element.read().updateActions(element)(state)
+        element => element.read().setActions,
+        element => element.read().setActions(element)(state)
       )(element)
   });
 

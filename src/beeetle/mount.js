@@ -5,7 +5,7 @@ const didMount = when(
   element =>
     element.read().componentDidMount({
       getState: element.read().getState(element),
-      updateState: fn => element.read().updateState(element)(fn)
+      setState: fn => element.read().setState(element)(fn)
     })
 );
 
