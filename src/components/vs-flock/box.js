@@ -1,4 +1,4 @@
-import Point, { lte, gte } from "./point";
+import { point, lte, gte } from "./point";
 
 export default class Box {
   constructor(least, greatest) {
@@ -31,31 +31,25 @@ export default class Box {
     result.push(
       new Box(
         this.low,
-        new Point(
-          (this.low.x + this.high.x) / 2,
-          (this.low.y + this.high.y) / 2
-        )
+        point((this.low.x + this.high.x) / 2, (this.low.y + this.high.y) / 2)
       )
     );
     result.push(
       new Box(
-        new Point((this.low.x + this.high.x) / 2, this.low.y),
-        new Point(this.high.x, (this.low.y + this.high.y) / 2)
+        point((this.low.x + this.high.x) / 2, this.low.y),
+        point(this.high.x, (this.low.y + this.high.y) / 2)
       )
     );
     result.push(
       new Box(
-        new Point(
-          (this.low.x + this.high.x) / 2,
-          (this.low.y + this.high.y) / 2
-        ),
+        point((this.low.x + this.high.x) / 2, (this.low.y + this.high.y) / 2),
         this.high
       )
     );
     result.push(
       new Box(
-        new Point(this.low.x, (this.low.y + this.high.y) / 2),
-        new Point((this.low.x + this.high.x) / 2, this.high.y)
+        point(this.low.x, (this.low.y + this.high.y) / 2),
+        point((this.low.x + this.high.x) / 2, this.high.y)
       )
     );
     return result;

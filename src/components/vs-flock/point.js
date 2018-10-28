@@ -1,3 +1,5 @@
+export const point = (x, y) => ({ x, y });
+
 export const lte = (a, b) => {
   if (a.x <= b.x && a.y <= b.y) {
     return true;
