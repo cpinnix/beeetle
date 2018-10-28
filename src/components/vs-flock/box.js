@@ -1,4 +1,4 @@
-import Point from "./point";
+import Point, { lte, gte } from "./point";
 
 export default class Box {
   constructor(least, greatest) {
@@ -7,7 +7,7 @@ export default class Box {
   }
 
   contains(point) {
-    if (this.low.lte(point) && this.high.gte(point)) {
+    if (lte(this.low, point) && gte(this.high, point)) {
       return true;
     }
     return false;

@@ -1,12 +1,12 @@
-import Box from "./box";
-import Point from "./point";
+import "./box";
+import { equals } from "./point";
 
 export default class Quadtree {
   constructor(box, max, max_level, level) {
     this.box = box;
     this.children = null;
     this.value = [];
-    this.max = max || 15; //maximum points allowed per node
+    this.max = max || 15; // maximum points allowed per node
     this.max_level = max_level || 10;
     this.level = level || 0;
   }
@@ -25,7 +25,7 @@ export default class Quadtree {
       (this.value.length < this.max || this.level === this.max_level)
     ) {
       for (i = 0; i < this.value.length; i++) {
-        if (this.value[i].point.equals(point)) {
+        if (equals(this.value[i].point, point)) {
           this.value[i].value = object;
           return;
         }
@@ -106,7 +106,7 @@ export default class Quadtree {
 
     if (this.value.length > 0) {
       for (var i = 0; i < this.value.length; i++) {
-        if (this.value[i].point.equals(point)) {
+        if (equals(this.value[i].point, point)) {
           return this.value[i].value;
         }
       }
