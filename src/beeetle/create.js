@@ -17,52 +17,40 @@ export const create = component => {
       };
 
       when(
-        component => component.updateState,
-        () => {
+        ({ read }) => read().updateState,
+        ({ read, write }) => {
           Object.defineProperty(this, "state", {
-            get: () => this.component.state,
-            set: fn => {
-              this.component = this.component.updateState(this.component)(fn);
-            }
+            get: () => read().state,
+            set: fn => read().updateState({ read, write })(fn)
           });
         }
-      )(this.component);
+      )(this);
 
       when(
-        component => component.updateActions,
-        () => {
+        ({ read }) => read().updateActions,
+        ({ read, write }) => {
           Object.defineProperty(this, "actions", {
-            get: () => this.component.actions,
-            set: fn => {
-              this.component = this.component.updateActions(this.component)(fn);
-            }
+            get: () => read().actions,
+            set: fn => read().updateActions({ read, write })(fn)
           });
         }
-      )(this.component);
+      )(this);
     }
 
     connectedCallback() {
-      console.log("connect");
       this.component.element = this;
 
-      const componentReader = () => this.component;
-      const componentWriter = newComponent => {
-        this.component = newComponent;
-      };
-
       when(
-        componentReader => componentReader().mount,
-        componentReader =>
-          componentReader().mount(componentReader, componentWriter)
-      )(componentReader);
+        ({ read }) => read().mount,
+        ({ read, ...rest }) => read().mount({ read, ...rest })
+      )(this);
     }
 
     disconnectedCallback() {
-      console.log("disconnect");
-
-      when(({ read }) => read().unmount, ({ read }) => read().unmount(read))(
-        this
-      );
+      when(
+        ({ read }) => read().unmount,
+        ({ read }) => read().unmount({ read })
+      )(this);
     }
   }
 

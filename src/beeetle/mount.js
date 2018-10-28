@@ -4,15 +4,18 @@ const didMount = when(
   ({ read }) => read().componentDidMount,
   ({ read, write }) =>
     read().componentDidMount({
-      updateState: fn => write(read().updateState(read())(fn))
+      updateState: fn => read().updateState({ read, write })(fn)
     })
 );
 
-const render = when(read => read().render, read => read().render(read()));
+const render = when(
+  ({ read }) => read().render,
+  ({ read }) => read().render({ read })
+);
 
 export const mount = {
-  mount: (read, write) => {
-    didMount({ read, write });
-    render(read);
+  mount: componentInterface => {
+    didMount(componentInterface);
+    render(componentInterface);
   }
 };

@@ -6,5 +6,5 @@ const didUnmount = when(
 );
 
 export const unmount = {
-  unmount: read => didUnmount({ read })
+  unmount: didUnmount
 };

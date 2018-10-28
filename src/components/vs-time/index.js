@@ -46,8 +46,5 @@ component(
 
     t.start();
   }),
-  componentDidUnmount(({ state: { timer } }) => {
-    console.log("unmount");
-    timer.stop();
-  })
+  componentDidUnmount(({ state: { timer } }) => timer.stop())
 );
