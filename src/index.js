@@ -26,6 +26,12 @@ router
         () => done()
       )
   })
+  .on("/flock", mount("vs-route-flock"), {
+    before: done =>
+      import(/* webpackChunkName: "vs-route-flock" */ "./routes/vs-route-flock").then(
+        () => done()
+      )
+  })
   .on("/vue", mount("vs-route-vue"), {
     before: done =>
       import(/* webpackChunkName: "vs-route-vue" */ "./routes/vs-route-vue").then(

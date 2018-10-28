@@ -23,6 +23,10 @@ component(
           </li>
           <li>
             <a onclick=${() =>
+              navigate("/flock")}><vs-text state=${"Flock"} /></a>
+          </li>
+          <li>
+            <a onclick=${() =>
               navigate("/clock")}><vs-text state=${"Clock"} /></a>
           </li>
           <li>
