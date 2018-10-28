@@ -2,27 +2,24 @@ import Vector from "./vector";
 // import BoxPoint from "./boxPoint";
 import Quadtree from "./quadtree";
 import Box from "./box";
-import Point from "./point";
+import { point } from "./point";
 
 export default class Flock {
   constructor(population, originX, originY, width, height) {
     // this.i = 0
     this.population = population || [];
     this.quadtree = new Quadtree(
-      new Box(
-        new Point(originX, originY),
-        new Point(originX + width, originY + height)
-      )
+      new Box(point(originX, originY), point(originX + width, originY + height))
     );
   }
 
   tick() {
     //insert boids into quadtree
-    let i, point, boid;
+    let i, pt, boid;
     for (i = 0; i < this.population.length; i++) {
       boid = this.population[i];
-      point = new Point(boid.position.x, boid.position.y);
-      this.quadtree.insert(point, boid);
+      pt = point(boid.position.x, boid.position.y);
+      this.quadtree.insert(pt, boid);
     }
 
     //calculate the forces on and resulting acceleration of each boid
