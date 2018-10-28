@@ -1,3 +1,19 @@
+const lte = (a, b) => {
+  if (a.x <= b.x && a.y <= b.y) {
+    return true;
+  }
+  return false;
+};
+
+const gte = (a, b) => {
+  if (a.x >= b.x && a.y >= b.y) {
+    return true;
+  }
+  return false;
+};
+
+const equals = (a, b) => a.x === b.x && a.y === b.y;
+
 export default class Point {
   constructor(x, y) {
     this.x = x;
@@ -5,20 +21,14 @@ export default class Point {
   }
 
   lte(point) {
-    if (this.x <= point.x && this.y <= point.y) {
-      return true;
-    }
-    return false;
+    return lte(this, point);
   }
 
   gte(point) {
-    if (this.x >= point.x && this.y >= point.y) {
-      return true;
-    }
-    return false;
+    return gte(this, point);
   }
 
   equals(point) {
-    return this.x === point.x && this.y === point.y;
+    return equals(this, point);
   }
 }
