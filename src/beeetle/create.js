@@ -1,6 +1,16 @@
 /* global HTMLElement */
 
+// i = Component Interface
+
 import { when } from "ramda";
+import { fromEvent } from "most";
+
+const ACTION = "BEEETLE:ACTION";
+const UPDATE_ACTIONS = "UPDATE_ACTIONS";
+const UPDATE_STATE = "UPDATE_STATE";
+
+const createEvent = (type, payload) =>
+  new CustomEvent(ACTION, { detail: { type, payload } });
 
 export const create = component => {
   class Base extends HTMLElement {
@@ -12,26 +22,45 @@ export const create = component => {
       };
 
       this.read = () => this.component;
-      this.write = n => {
-        this.component = n;
-      };
+
+      const mainStream = fromEvent(ACTION, this).map(e => e.detail);
+
+      mainStream
+        .filter(action => action.type === UPDATE_ACTIONS)
+        .map(action => action.payload)
+        .forEach(payload => {
+          this.component.actions = payload;
+        });
+
+      mainStream
+        .filter(action => action.type === UPDATE_STATE)
+        .map(action => action.payload)
+        .forEach(payload => {
+          this.component.state = payload;
+        });
+
+      this.dispatch = event => this.dispatchEvent(event);
+
+      this.updateActions = payload => createEvent(UPDATE_ACTIONS, payload);
+
+      this.updateState = payload => createEvent(UPDATE_STATE, payload);
 
       when(
-        ({ read }) => read().updateState,
-        ({ read, write }) => {
+        i => i.read().updateState,
+        i => {
           Object.defineProperty(this, "state", {
-            get: () => read().state,
-            set: fn => read().updateState({ read, write })(fn)
+            get: () => i.read().state,
+            set: fn => i.read().updateState(i)(fn)
           });
         }
       )(this);
 
       when(
-        ({ read }) => read().updateActions,
-        ({ read, write }) => {
+        i => i.read().updateActions,
+        i => {
           Object.defineProperty(this, "actions", {
-            get: () => read().actions,
-            set: fn => read().updateActions({ read, write })(fn)
+            get: () => i.read().actions,
+            set: fn => i.read().updateActions(i)(fn)
           });
         }
       )(this);
@@ -39,18 +68,11 @@ export const create = component => {
 
     connectedCallback() {
       this.component.element = this;
-
-      when(
-        ({ read }) => read().mount,
-        ({ read, ...rest }) => read().mount({ read, ...rest })
-      )(this);
+      when(i => i.read().mount, i => i.read().mount(i))(this);
     }
 
     disconnectedCallback() {
-      when(
-        ({ read }) => read().unmount,
-        ({ read }) => read().unmount({ read })
-      )(this);
+      when(i => i.read().unmount, i => i.read().unmount(i))(this);
     }
   }
 

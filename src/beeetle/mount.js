@@ -1,21 +1,18 @@
 import { when } from "ramda";
 
 const didMount = when(
-  ({ read }) => read().componentDidMount,
-  ({ read, write }) =>
-    read().componentDidMount({
-      updateState: fn => read().updateState({ read, write })(fn)
+  i => i.read().componentDidMount,
+  i =>
+    i.read().componentDidMount({
+      updateState: fn => i.read().updateState(i)(fn)
     })
 );
 
-const render = when(
-  ({ read }) => read().render,
-  ({ read }) => read().render({ read })
-);
+const render = when(i => i.read().render, i => i.read().render(i));
 
 export const mount = {
-  mount: componentInterface => {
-    didMount(componentInterface);
-    render(componentInterface);
+  mount: i => {
+    didMount(i);
+    render(i);
   }
 };

@@ -1,8 +1,7 @@
 import component from "../component";
 import hyper from "../../renderers/hyper";
-import { name, render, actions } from "../../beeetle";
+import { name, render, actions, printWarning } from "../../beeetle";
 import "../vs-text";
-import { printWarning } from "../../print-warning";
 
 const obj = {};
 

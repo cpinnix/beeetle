@@ -1,8 +1,13 @@
-import { when } from "ramda";
+import { pipe, when } from "ramda";
+
+const read = i => i.read();
 
 export const render = fn => ({
-  render: when(
-    ({ read }) => read().element,
-    ({ read }) => fn(read().element, read().state, read().actions)
+  render: pipe(
+    read,
+    when(
+      component => component.element,
+      component => fn(component.element, component.state, component.actions)
+    )
   )
 });

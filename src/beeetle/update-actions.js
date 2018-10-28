@@ -1,13 +1,18 @@
-import { when, is, ifElse } from "ramda";
+// i = Component Interface
 
-const render = ({ read }) => read().render({ read });
+import { pipe, when, is, ifElse } from "ramda";
 
-const updateActionsWith = actions =>
-  ifElse(v => is(Function, v), v => v(actions), v => v);
+const render = when(i => i.read().render, i => i.read().render(i));
+
+const updateWith = ifElse(
+  updater => is(Function, updater),
+  updater => val => updater(val),
+  updater => () => updater
+);
 
 export const updateActions = {
-  updateActions: ({ read, write }) => updater => {
-    write({ ...read(), actions: updateActionsWith(read().actions)(updater) });
-    when(({ read }) => read().element, render)({ read });
+  updateActions: i => updater => {
+    pipe(updateWith(updater), i.updateActions, i.dispatch)(i.read().state);
+    render(i);
   }
 };
