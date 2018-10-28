@@ -1,6 +1,7 @@
 export * from "./name";
 export * from "./state";
 export * from "./actions";
+export * from "./get-state";
 export * from "./update-state";
 export * from "./update-actions";
 export * from "./mount";

@@ -4,6 +4,7 @@ const didMount = when(
   i => i.read().componentDidMount,
   i =>
     i.read().componentDidMount({
+      getState: i.read().getState(i),
       updateState: fn => i.read().updateState(i)(fn)
     })
 );

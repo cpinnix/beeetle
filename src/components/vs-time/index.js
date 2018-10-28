@@ -37,14 +37,14 @@ component(
     `
     )
   ),
-  componentDidMount(({ updateState }) => {
-    const update = () => updateState(state => ({ ...state, time: getTime() }));
+  componentDidMount(({ getState, updateState }) => {
+    const update = () => updateState({ ...getState(), time: getTime() });
 
     const t = timer(update);
 
-    updateState(state => ({ ...state, timer: t }));
+    updateState({ ...getState(), timer: t });
 
     t.start();
   }),
-  componentDidUnmount(({ state: { timer } }) => timer.stop())
+  componentDidUnmount(({ getState }) => getState().timer.stop())
 );

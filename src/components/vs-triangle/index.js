@@ -36,20 +36,18 @@ component(
       element
     );
   }),
-  componentDidMount(({ updateState }) => {
+  componentDidMount(({ getState, updateState }) => {
     const tick = () => {
-      updateState(state => {
-        const elapsed = new Date().getTime() - state.props.start;
-        const newSeconds = Math.floor(elapsed / 1000);
-        return {
-          ...state,
-          props: {
-            ...state.props,
-            elapsed,
-            seconds: state.props.newSeconds,
-            newSeconds
-          }
-        };
+      const elapsed = new Date().getTime() - getState().props.start;
+      const newSeconds = Math.floor(elapsed / 1000);
+      updateState({
+        ...getState(),
+        props: {
+          ...getState().props,
+          elapsed,
+          seconds: getState().props.newSeconds,
+          newSeconds
+        }
       });
       requestAnimationFrame(tick);
     };
