@@ -1,5 +1,5 @@
-export const printWarning = text => {
-  const message = "Warning: " + text;
+export const printWarning = (subject, text) => {
+  const message = `Warning - ${subject} - ${text}`;
   if (typeof console !== "undefined") {
     console.error(message);
   }

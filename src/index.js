@@ -3,6 +3,10 @@
 import "./components/vs-header";
 import { router, mount } from "./router";
 
+document.querySelector("vs-header").actions = {
+  navigate: to => router.navigate(to)
+};
+
 router
   .on("/", mount("vs-route-home"), {
     before: done =>

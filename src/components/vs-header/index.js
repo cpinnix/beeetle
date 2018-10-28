@@ -2,19 +2,22 @@ import component from "../component";
 import hyper from "../../renderers/hyper";
 import { name, render, actions } from "../../beeetle";
 import "../vs-text";
-import { router } from "../../router";
+import { printWarning } from "../../print-warning";
 
 const obj = {};
 
 component(
   name("vs-header"),
   actions({
-    navigate: to => router.navigate(to)
+    navigate: () => printWarning("vs-header", "navigate function is unset")
   }),
   render(
     hyper(
       (wire, _, { navigate }) => wire(obj)`
         <ul>
+          <li>
+            <a onclick=${() => navigate("/")}><vs-text state=${"Home"} /></a>
+          </li>
           <li>
             <a onclick=${() =>
               navigate("/triangle")}><vs-text state=${"Triangle"} /></a>

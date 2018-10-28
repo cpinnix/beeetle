@@ -9,7 +9,7 @@ import {
 } from "../beeetle";
 
 const didCreate = component =>
-  console.log(["Created", component.name].join(" | "));
+  console.log(["Created", component.name].join(" "));
 
 const component = (...plugins) => {
   create(
