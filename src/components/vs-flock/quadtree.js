@@ -28,7 +28,7 @@ const insert = (tree, point, object) => {
 
   //if is a leaf node but full, call split
   if (tree.children === null && tree.level < tree.max_level) {
-    tree.split();
+    split(tree);
   }
 
   // if is not a leaf node, call insert on child nodes
@@ -131,10 +131,6 @@ export default class Quadtree {
 
   insert(point, object) {
     return insert(this, point, object);
-  }
-
-  split() {
-    split(this);
   }
 
   queryRange(box) {
