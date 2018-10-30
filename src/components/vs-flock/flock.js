@@ -2,6 +2,8 @@
 import Quadtree from "./quad-tree/quad-tree";
 import box from "./box/box";
 import point from "./point/point";
+import insert from "./quad-tree/insert";
+import clear from "./quad-tree/clear";
 
 export default class Flock {
   constructor(population, originX, originY, width, height) {
@@ -18,7 +20,7 @@ export default class Flock {
     for (i = 0; i < this.population.length; i++) {
       boid = this.population[i];
       pt = point(boid.position.x, boid.position.y);
-      this.quadtree.insert(pt, boid);
+      insert(this.quadtree, pt, boid);
     }
 
     //calculate the forces on and resulting acceleration of each boid
@@ -38,7 +40,7 @@ export default class Flock {
       this.population[i].update();
     }
     //reset our quadtree
-    this.quadtree.clear();
+    clear(this.quadtree);
   }
 
   forEach(callback) {
