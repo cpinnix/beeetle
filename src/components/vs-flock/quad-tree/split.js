@@ -6,17 +6,12 @@ const split = (tree, insertFn) => {
   tree.nextLevel = tree.level + 1;
   tree.children = bSplit(tree.box.low, tree.box.high);
 
-  for (var i = 0; i < tree.children.length; i++) {
-    tree.children[i] = quadTree(
-      tree.children[i],
-      tree.max,
-      tree.max_level,
-      tree.nextLevel
-    );
-  }
+  tree.children = tree.children.map(child =>
+    quadTree(child, tree.max, tree.max_level, tree.nextLevel)
+  );
 
   // redistribute values to appropriate child nodes
-  for (i = 0; i < tree.value.length; i++) {
+  for (let i = 0; i < tree.value.length; i++) {
     for (let k = 0; k < tree.children.length; k++) {
       insertFn(tree.children[k], tree.value[i].point, tree.value[i].value);
     }
