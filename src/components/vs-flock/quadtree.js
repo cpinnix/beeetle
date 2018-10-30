@@ -1,4 +1,7 @@
 import equals from "./point/equals";
+import contains from "./box/contains";
+import split from "./box/split";
+import overlaps from "./box/overlaps";
 
 export default class Quadtree {
   constructor(box, max, max_level, level) {
@@ -12,7 +15,7 @@ export default class Quadtree {
 
   insert(point, object) {
     //check if should contain point
-    if (!this.box.contains(point)) {
+    if (!contains(this.box.low, this.box.high, point)) {
       return this;
     }
 
@@ -49,7 +52,7 @@ export default class Quadtree {
   split() {
     //split into 4 congruent child quadrants using box quadrant method
     this.nextLevel = this.level + 1;
-    this.children = this.box.split();
+    this.children = split(this.box.low, this.box.high);
     for (var i = 0; i < this.children.length; i++) {
       this.children[i] = new Quadtree(
         this.children[i],
@@ -75,14 +78,14 @@ export default class Quadtree {
 
   _queryRangeRec(box, result) {
     //if query area doesn't overlap this box then return
-    if (!this.box.overlaps(box)) {
+    if (!overlaps(this.box, box)) {
       return;
     }
     //if leaf node with contained value(s), then check against contained objects
     let i;
     if (this.value.length > 0) {
       for (i = 0; i < this.value.length; i++) {
-        if (box.contains(this.value[i].point)) {
+        if (contains(box.low, box.high, this.value[i].point)) {
           result.push(this.value[i]);
         }
       }

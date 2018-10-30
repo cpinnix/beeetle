@@ -1,5 +1,5 @@
 import Vector from "./vector";
-import Box from "./box/box";
+import box from "./box/box";
 import point from "./point/point";
 
 export default class Boid {
@@ -86,14 +86,14 @@ export default class Boid {
   }
 
   getNeighbors(aoe, position, quadtree) {
-    const aoeRange = new Box(
+    const aoeRange = box(
       point(position.x - aoe, position.y - aoe),
       point(position.x + aoe, position.y + aoe)
     );
     let neighbors = quadtree.queryRange(aoeRange);
 
     //get all boids within AoE
-    // const aoeBounds = new BoxPoint(position.x, position.y, aoe.width, aoe.height);
+    // const aoeBounds = boxPoint(position.x, position.y, aoe.width, aoe.height);
     // const neighbors = quadtree.retrieve(aoeBounds);
 
     neighbors = neighbors.slice(0, 100);
