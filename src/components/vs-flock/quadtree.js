@@ -62,7 +62,7 @@ const split = tree => {
   }
 };
 
-const queryRangeRec = (tree, box, result) => {
+const queryRange = (tree, box, result) => {
   //if query area doesn't overlap this box then return
   if (!overlaps(tree.box, box)) {
     return;
@@ -80,14 +80,10 @@ const queryRangeRec = (tree, box, result) => {
   //if has children, then make recursive call on children
   if (tree.children !== null) {
     for (i = 0; i < tree.children.length; i++) {
-      tree.children[i]._queryRangeRec(box, result);
+      queryRange(tree.children[i], box, result);
     }
     return;
   }
-};
-
-const queryRange = (tree, box, result) => {
-  return queryRangeRec(tree, box, result);
 };
 
 const queryPoint = (tree, point) => {
@@ -137,10 +133,6 @@ export default class Quadtree {
     const result = [];
     queryRange(this, box, result);
     return result;
-  }
-
-  _queryRangeRec(box, result) {
-    return queryRangeRec(this, box, result);
   }
 
   queryPoint(point) {
