@@ -2,14 +2,25 @@ import contains from "../box/contains";
 import equals from "../point/equals";
 import split from "./split";
 
+const updateTreeValueValueAt = (tree, i, object) => ({
+  ...tree,
+  value: [
+    ...tree.value.slice(0, i),
+    { ...tree.value[i], value: object },
+    ...tree.value.slice(i + 1)
+  ]
+});
+
 const insert = (tree, point, object) => {
-  //check if should contain point
+  // check if should contain point
   if (!contains(tree.box.low, tree.box.high, point)) {
-    return tree;
+    return {
+      ...tree
+    };
   }
 
-  //if is a leaf node and not full, then insert
-  //need to check if it already exists though
+  // if is a leaf node and not full, then insert
+  // need to check if it already exists though
   let i;
   if (
     tree.children === null &&
@@ -17,12 +28,12 @@ const insert = (tree, point, object) => {
   ) {
     for (i = 0; i < tree.value.length; i++) {
       if (equals(tree.value[i].point, point)) {
-        tree.value[i].value = object;
-        return;
+        return updateTreeValueValueAt(tree, i, object);
       }
     }
+
     tree.value.push({ point, value: object });
-    return tree;
+    return { ...tree };
   }
 
   //if is a leaf node but full, call split
@@ -36,7 +47,7 @@ const insert = (tree, point, object) => {
   }
   tree.value = [];
 
-  return tree;
+  return { ...tree };
 };
 
 export default insert;
