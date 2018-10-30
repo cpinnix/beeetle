@@ -1,5 +1,5 @@
 import Vector from "./vector";
-import Box from "./box";
+import Box from "./box/box";
 import point from "./point/point";
 
 export default class Boid {

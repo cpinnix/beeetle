@@ -1,4 +1,3 @@
-import "./box";
 import equals from "./point/equals";
 
 export default class Quadtree {

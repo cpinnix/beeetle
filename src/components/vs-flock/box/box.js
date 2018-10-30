@@ -1,14 +1,6 @@
-import point from "./point/point";
-import lte from "./point/lte";
-import gte from "./point/gte";
-
-const contains = (a, b, p) => lte(a, p) && gte(b, p);
-
-const overlaps = (a, b) =>
-  contains(a.low, a.high, b.low) ||
-  contains(a.low, a.high, b.high) ||
-  contains(b.low, b.high, a.low) ||
-  contains(b.low, b.high, a.high);
+import contains from "./contains";
+import overlaps from "./overlaps";
+import point from "../point/point";
 
 const split = (low, high) => {
   const result = [];
