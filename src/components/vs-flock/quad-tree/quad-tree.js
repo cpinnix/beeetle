@@ -1,10 +1,10 @@
-export default class Quadtree {
-  constructor(box, max, max_level, level) {
-    this.box = box;
-    this.children = null;
-    this.value = [];
-    this.max = max || 15; // maximum points allowed per node
-    this.max_level = max_level || 10;
-    this.level = level || 0;
-  }
-}
+const quadTree = (box, max = 15, max_level = 10, level = 0) => ({
+  box,
+  max,
+  max_level,
+  level,
+  children: null,
+  value: []
+});
+
+export default quadTree;

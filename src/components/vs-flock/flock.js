@@ -1,5 +1,5 @@
 // import BoxPoint from "./boxPoint";
-import Quadtree from "./quad-tree/quad-tree";
+import quadTree from "./quad-tree/quad-tree";
 import box from "./box/box";
 import point from "./point/point";
 import insert from "./quad-tree/insert";
@@ -9,7 +9,7 @@ export default class Flock {
   constructor(population, originX, originY, width, height) {
     // this.i = 0
     this.population = population || [];
-    this.quadtree = new Quadtree(
+    this.quadtree = quadTree(
       box(point(originX, originY), point(originX + width, originY + height))
     );
   }
