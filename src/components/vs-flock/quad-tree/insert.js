@@ -26,11 +26,16 @@ const insert = (tree, point, object) => {
     tree.children === null &&
     (tree.value.length < tree.max || tree.level === tree.max_level)
   ) {
-    for (i = 0; i < tree.value.length; i++) {
-      if (equals(tree.value[i].point, point)) {
-        return updateTreeValueValueAt(tree, i, object);
-      }
+    const index = tree.value.find(value => equals(value.point, point));
+
+    if (index) {
+      return updateTreeValueValueAt(tree, index, object);
     }
+    // for (i = 0; i < tree.value.length; i++) {
+    //   if (equals(tree.value[i].point, point)) {
+    //     return updateTreeValueValueAt(tree, i, object);
+    //   }
+    // }
 
     tree.value.push({ point, value: object });
     return { ...tree };
@@ -42,9 +47,6 @@ const insert = (tree, point, object) => {
   }
 
   // if is not a leaf node, call insert on child nodes
-  // for (i = 0; i < tree.children.length; i++) {
-  //   insert(tree.children[i], point, object);
-  // }
   tree.children.forEach(child => insert(child, point, object));
   tree.value = [];
 
