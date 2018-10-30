@@ -2,7 +2,7 @@
 
 import component from "../component";
 import { render, name, state, componentDidMount } from "../../beeetle";
-import Vector from "./vector";
+import point from "./point/point";
 import Boid from "./boid";
 import Flock from "./flock";
 
@@ -50,8 +50,8 @@ component(
   }),
   componentDidMount(({ getState, setState }) => {
     const opts = {
-      position: new Vector(300, 300), //default position
-      velocity: new Vector(1, 1), //default starting velocity
+      position: point(300, 300), //default position
+      velocity: point(1, 1), //default starting velocity
       cohesionAOE: 25,
       separationAOE: 8
     };
@@ -59,11 +59,11 @@ component(
     const population = [];
     let size = 800;
     while (size--) {
-      opts.position = new Vector(
+      opts.position = point(
         Math.random() * window.innerWidth,
         Math.random() * window.innerHeight
       );
-      opts.velocity = new Vector(
+      opts.velocity = point(
         (Math.random() - 0.5) * 1,
         (Math.random() - 0.5) * 1
       );

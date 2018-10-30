@@ -1,4 +1,3 @@
-import Vector from "./vector";
 // import BoxPoint from "./boxPoint";
 import Quadtree from "./quadtree";
 import box from "./box/box";

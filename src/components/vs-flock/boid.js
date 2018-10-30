@@ -1,13 +1,17 @@
-import Vector from "./vector";
 import box from "./box/box";
 import point from "./point/point";
+import add from "./point/add";
+import sub from "./point/sub";
+import multiplyScalar from "./point/multiply-scalar";
+import magnitude from "./point/magnitude";
+import unitVector from "./point/unitVector";
 
 export default class Boid {
   constructor(opts) {
     this.opts = opts;
-    this.position = opts.position || new Vector(0, 0);
-    this.velocity = opts.velocity || new Vector(0, 0);
-    this.acceleration = opts.acceleration || new Vector(0, 0);
+    this.position = opts.position || point(0, 0);
+    this.velocity = opts.velocity || point(0, 0);
+    this.acceleration = opts.acceleration || point(0, 0);
     this.velocityLimit = opts.velocityLimit || 2.5;
     this.accelerationLimit = opts.accelerationLimit || 0.5;
 
@@ -21,7 +25,7 @@ export default class Boid {
     this.alignmentStrength = opts.alignmentStrength || 15;
     this.boundaryStrength = opts.boundaryStrength || 50;
 
-    this.nextAcceleration = new Vector(0, 0);
+    this.nextAcceleration = point(0, 0);
   }
 
   update() {
@@ -31,25 +35,25 @@ export default class Boid {
   }
 
   updateVelocity() {
-    this.velocity = this.velocity.add(this.acceleration);
-    if (this.velocity.magnitude() > this.velocityLimit) {
-      this.velocity = this.velocity.unitVector(this.velocityLimit);
+    this.velocity = add(this.velocity, this.acceleration);
+    if (magnitude(this.velocity) > this.velocityLimit) {
+      this.velocity = unitVector(this.velocity, this.velocityLimit);
     }
   }
 
   updatePosition() {
-    this.position = this.position.add(this.velocity);
+    this.position = add(this.position, this.velocity);
   }
 
   updateAcceleration() {
     this.acceleration = this.nextAcceleration;
-    if (this.acceleration.magnitude() > this.accelerationLimit) {
-      this.acceleration = this.acceleration.unitVector(this.accelerationLimit);
+    if (magnitude(this.acceleration) > this.accelerationLimit) {
+      this.acceleration = unitVector(this.acceleration, this.accelerationLimit);
     }
   }
 
   calculateNextAcceleration(quadtree) {
-    let resultVector = new Vector(0, 0);
+    let resultVector = point(0, 0);
     this.cohesionAOE = this.opts.cohesionAOE;
     const neighbors = this.getNeighbors(
       this.cohesionAOE,
@@ -57,31 +61,38 @@ export default class Boid {
       quadtree
     );
 
-    const cohesionForce = this.calculateCohesionForce(neighbors).multiplyScalar(
+    const cohesionForce = multiplyScalar(
+      this.calculateCohesionForce(neighbors),
       this.cohesionStrength
     );
 
-    const alignmentForce = this.calculateAlignmentForce(
-      neighbors
-    ).multiplyScalar(this.alignmentStrength);
+    const alignmentForce = multiplyScalar(
+      this.calculateAlignmentForce(neighbors),
+      this.alignmentStrength
+    );
 
-    const separationForce = this.calculateSeparationForce(
-      quadtree
-    ).multiplyScalar(this.separationStrength);
+    const separationForce = multiplyScalar(
+      this.calculateSeparationForce(quadtree),
+      this.separationStrength
+    );
 
-    const boundaryAvoidanceForce = this.boundaryAvoidance().multiplyScalar(
+    const boundaryAvoidanceForce = multiplyScalar(
+      this.boundaryAvoidance(),
       this.boundaryStrength
     );
 
-    resultVector = resultVector.add(cohesionForce);
-    resultVector = resultVector.add(alignmentForce);
-    resultVector = resultVector.add(separationForce);
-    resultVector = resultVector.add(boundaryAvoidanceForce);
+    resultVector = add(resultVector, cohesionForce);
+    resultVector = add(resultVector, alignmentForce);
+    resultVector = add(resultVector, separationForce);
+    resultVector = add(resultVector, boundaryAvoidanceForce);
 
-    this.nextAcceleration = this.acceleration.add(resultVector);
+    this.nextAcceleration = add(this.acceleration, resultVector);
 
-    if (this.nextAcceleration.magnitude() > this.accelerationLimit) {
-      this.nextAcceleration.unitVector(this.accelerationLimit);
+    if (magnitude(this.nextAcceleration) > this.accelerationLimit) {
+      this.nextAcceleration = unitVector(
+        this.nextAcceleration,
+        this.accelerationLimit
+      );
     }
   }
 
@@ -107,21 +118,21 @@ export default class Boid {
     //                                     this.position,
     //                                     quadtree)
 
-    let result = new Vector(0, 0);
+    let result = point(0, 0);
 
     if (neighbors.length === 0) {
       return result;
     }
 
     for (let i = 0; i < neighbors.length; i++) {
-      result = result.add(neighbors[i].value.position);
+      result = add(result, neighbors[i].value.position);
     }
 
     //average
-    result.multiplyScalar(1 / neighbors.length);
+    result = multiplyScalar(result, 1 / neighbors.length);
 
     //subtract current position from center of mass
-    result = result.sub(this.position);
+    result = sub(result, this.position);
     return result;
   }
 
@@ -131,15 +142,17 @@ export default class Boid {
     //                                     this.position,
     //                                     quadtree)
 
-    let result = new Vector(0, 0);
+    let result = point(0, 0);
     if (neighbors.length === 0 || neighbors === undefined) {
       return result;
     }
 
     for (let i = 0; i < neighbors.length; i++) {
-      result = result.add(neighbors[i].value.velocity);
+      result = add(result, neighbors[i].value.velocity);
     }
-    result.multiplyScalar(1 / neighbors.length); //avg neighbor orientation
+
+    result = multiplyScalar(result, 1 / neighbors.length); //avg neighbor orientation
+
     return result;
   }
 
@@ -150,24 +163,25 @@ export default class Boid {
       this.position,
       quadtree
     );
-    let result = new Vector(0, 0);
+    let result = point(0, 0);
     if (neighbors.length === 0 || neighbors === undefined) {
       return result;
     }
 
     //determine the repulsion vector and add to final result
     for (let i = 0; i < neighbors.length; i++) {
-      result = result.add(this.position.sub(neighbors[i].value.position));
+      result = add(result, sub(this.position, neighbors[i].value.position));
     }
 
     //get average
-    result.multiplyScalar(1 / neighbors.length);
+    result = multiplyScalar(result, 1 / neighbors.length);
+
     return result;
   }
 
   boundaryAvoidance() {
     const bounds = [100, 50, window.innerHeight - 130, window.innerWidth - 100];
-    let result = new Vector(0, 0);
+    let result = point(0, 0);
 
     if (this.position.x < bounds[1]) {
       result.x = bounds[1] - this.position.x;
