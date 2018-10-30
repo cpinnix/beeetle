@@ -5,6 +5,7 @@ import sub from "./point/sub";
 import multiplyScalar from "./point/multiply-scalar";
 import magnitude from "./point/magnitude";
 import unitVector from "./point/unitVector";
+import queryRange from "./quad-tree/query-range";
 
 export default class Boid {
   constructor(opts) {
@@ -101,7 +102,7 @@ export default class Boid {
       point(position.x - aoe, position.y - aoe),
       point(position.x + aoe, position.y + aoe)
     );
-    let neighbors = quadtree.queryRange(aoeRange);
+    let neighbors = queryRange(quadtree, aoeRange);
 
     //get all boids within AoE
     // const aoeBounds = boxPoint(position.x, position.y, aoe.width, aoe.height);

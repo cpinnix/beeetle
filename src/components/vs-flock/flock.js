@@ -1,5 +1,5 @@
 // import BoxPoint from "./boxPoint";
-import Quadtree from "./quadtree";
+import Quadtree from "./quad-tree/quad-tree";
 import box from "./box/box";
 import point from "./point/point";
 

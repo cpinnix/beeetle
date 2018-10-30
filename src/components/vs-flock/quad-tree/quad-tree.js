@@ -1,7 +1,6 @@
-import equals from "./point/equals";
-import contains from "./box/contains";
-import bSplit from "./box/split";
-import overlaps from "./box/overlaps";
+import equals from "../point/equals";
+import contains from "../box/contains";
+import bSplit from "../box/split";
 
 const insert = (tree, point, object) => {
   //check if should contain point
@@ -62,54 +61,6 @@ const split = tree => {
   }
 };
 
-const queryRange = (tree, box, result) => {
-  //if query area doesn't overlap this box then return
-  if (!overlaps(tree.box, box)) {
-    return;
-  }
-  //if leaf node with contained value(s), then check against contained objects
-  let i;
-  if (tree.value.length > 0) {
-    for (i = 0; i < tree.value.length; i++) {
-      if (contains(box.low, box.high, tree.value[i].point)) {
-        result.push(tree.value[i]);
-      }
-    }
-    return;
-  }
-  //if has children, then make recursive call on children
-  if (tree.children !== null) {
-    for (i = 0; i < tree.children.length; i++) {
-      queryRange(tree.children[i], box, result);
-    }
-    return;
-  }
-};
-
-const queryPoint = (tree, point) => {
-  //return value if point in tree
-  if (!contains(tree.box.low, tree.box.high, point)) {
-    return null;
-  }
-
-  if (tree.value.length > 0) {
-    for (var i = 0; i < tree.value.length; i++) {
-      if (equals(tree.value[i].point, point)) {
-        return tree.value[i].value;
-      }
-    }
-  }
-
-  if (tree.children !== null) {
-    let val = null;
-    for (var i = 0; i < tree.children.length; i++) {
-      val = val || tree.children[i].queryPoint(point);
-    }
-    return val;
-  }
-  return null;
-};
-
 const clear = tree => {
   tree.children = null;
   tree.value = [];
@@ -127,16 +78,6 @@ export default class Quadtree {
 
   insert(point, object) {
     return insert(this, point, object);
-  }
-
-  queryRange(box) {
-    const result = [];
-    queryRange(this, box, result);
-    return result;
-  }
-
-  queryPoint(point) {
-    return queryPoint(this, point);
   }
 
   clear() {
