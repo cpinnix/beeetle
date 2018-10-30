@@ -2,58 +2,48 @@ import point from "./point/point";
 import lte from "./point/lte";
 import gte from "./point/gte";
 
+const contains = (a, b, p) => lte(a, p) && gte(b, p);
+
+const overlaps = (a, b) =>
+  contains(a.low, a.high, b.low) ||
+  contains(a.low, a.high, b.high) ||
+  contains(b.low, b.high, a.low) ||
+  contains(b.low, b.high, a.high);
+
+const split = (low, high) => {
+  const result = [];
+  result.push(new Box(low, point((low.x + high.x) / 2, (low.y + high.y) / 2)));
+  result.push(
+    new Box(
+      point((low.x + high.x) / 2, low.y),
+      point(high.x, (low.y + high.y) / 2)
+    )
+  );
+  result.push(new Box(point((low.x + high.x) / 2, (low.y + high.y) / 2), high));
+  result.push(
+    new Box(
+      point(low.x, (low.y + high.y) / 2),
+      point((low.x + high.x) / 2, high.y)
+    )
+  );
+  return result;
+};
+
 export default class Box {
   constructor(least, greatest) {
     this.low = least;
     this.high = greatest;
   }
 
-  contains(point) {
-    if (lte(this.low, point) && gte(this.high, point)) {
-      return true;
-    }
-    return false;
+  contains(p) {
+    return contains(this.low, this.high, p);
   }
 
   overlaps(box) {
-    //if this contains either point of box, then there is an overlap
-    if (
-      this.contains(box.low) ||
-      this.contains(box.high) ||
-      box.contains(this.low) ||
-      box.contains(this.high)
-    ) {
-      return true;
-    }
-    return false;
+    return overlaps(this, box);
   }
 
   split() {
-    const result = [];
-    result.push(
-      new Box(
-        this.low,
-        point((this.low.x + this.high.x) / 2, (this.low.y + this.high.y) / 2)
-      )
-    );
-    result.push(
-      new Box(
-        point((this.low.x + this.high.x) / 2, this.low.y),
-        point(this.high.x, (this.low.y + this.high.y) / 2)
-      )
-    );
-    result.push(
-      new Box(
-        point((this.low.x + this.high.x) / 2, (this.low.y + this.high.y) / 2),
-        this.high
-      )
-    );
-    result.push(
-      new Box(
-        point(this.low.x, (this.low.y + this.high.y) / 2),
-        point((this.low.x + this.high.x) / 2, this.high.y)
-      )
-    );
-    return result;
+    return split(this.low, this.high);
   }
 }
