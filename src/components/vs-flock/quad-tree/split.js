@@ -1,5 +1,5 @@
 import bSplit from "../box/split";
-import Quadtree from "./quad-tree";
+import quadTree from "./quad-tree";
 
 const split = (tree, insertFn) => {
   // split into 4 congruent child quadrants using box quadrant method
@@ -7,7 +7,7 @@ const split = (tree, insertFn) => {
   tree.children = bSplit(tree.box.low, tree.box.high);
 
   for (var i = 0; i < tree.children.length; i++) {
-    tree.children[i] = new Quadtree(
+    tree.children[i] = quadTree(
       tree.children[i],
       tree.max,
       tree.max_level,

@@ -15,7 +15,7 @@ export default class Flock {
   }
 
   tick() {
-    //insert boids into quadtree
+    // insert boids into quadtree
     let i, pt, boid;
     for (i = 0; i < this.population.length; i++) {
       boid = this.population[i];
@@ -23,24 +23,24 @@ export default class Flock {
       insert(this.quadtree, pt, boid);
     }
 
-    //calculate the forces on and resulting acceleration of each boid
+    // calculate the forces on and resulting acceleration of each boid
     for (i = 0; i < this.population.length; i++) {
-      //the callback function here returns the set of boids that will cause an effect
-      //it is abstracted as a callback so we're not hardwired into using a quadtree
-      //for neighbor range lookup
+      // the callback function here returns the set of boids that will cause an effect
+      // it is abstracted as a callback so we're not hardwired into using a quadtree
+      // for neighbor range lookup
       if (window.changed) {
         debugger;
       }
       this.population[i].calculateNextAcceleration(this.quadtree);
     }
-    //update acceleration velocity and position for each boid
-    //after we've calculated what the current forces being applied
-    //to the boid are
+    // update acceleration velocity and position for each boid
+    // after we've calculated what the current forces being applied
+    // to the boid are
     for (i = 0; i < this.population.length; i++) {
       this.population[i].update();
     }
-    //reset our quadtree
-    clear(this.quadtree);
+    // reset our quadtree
+    this.quadtree = clear(this.quadtree);
   }
 
   forEach(callback) {
