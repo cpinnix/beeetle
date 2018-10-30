@@ -36,15 +36,16 @@ const insert = (tree, point, object) => {
     return { ...tree };
   }
 
-  //if is a leaf node but full, call split
+  // if is a leaf node but full, call split
   if (tree.children === null && tree.level < tree.max_level) {
     split(tree, insert);
   }
 
   // if is not a leaf node, call insert on child nodes
-  for (i = 0; i < tree.children.length; i++) {
-    insert(tree.children[i], point, object);
-  }
+  // for (i = 0; i < tree.children.length; i++) {
+  //   insert(tree.children[i], point, object);
+  // }
+  tree.children.forEach(child => insert(child, point, object));
   tree.value = [];
 
   return { ...tree };
