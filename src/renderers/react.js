@@ -1,7 +1,7 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import { createElement } from "react";
+import { render } from "react-dom";
 
 const react = fn => (element, ...rest) =>
-  ReactDOM.render(fn(...rest)(React.createElement), element);
+  render(fn(createElement, ...rest), element);
 
 export default react;

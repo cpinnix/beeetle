@@ -1,46 +1,56 @@
 /* global document, import */
 
-import "./components/vs-header";
+import "./components/btl-header";
 import { router, mount } from "./router";
 
-document.querySelector("vs-header").actions = {
-  navigate: to => router.navigate(to)
-};
+document.querySelector("btl-header").navigate = to => router.navigate(to);
 
 router
-  .on("/", mount("vs-route-home"), {
+  .on("/", mount("btl-route-home"), {
     before: done =>
-      import(/* webpackChunkName: "vs-route-home" */ "./routes/vs-route-home").then(
+      import(/* webpackChunkName: "btl-route-home" */ "./routes/btl-route-home").then(
         () => done()
       )
   })
-  .on("/clock", mount("vs-route-clock"), {
+  .on("/todo", mount("btl-route-todo"), {
     before: done =>
-      import(/* webpackChunkName: "vs-route-clock" */ "./routes/vs-route-clock").then(
+      import(/* webpackChunkName: "btl-route-todo" */ "./routes/btl-route-todo").then(
         () => done()
       )
   })
-  .on("/triangle", mount("vs-route-triangle"), {
+  .on("/clock", mount("btl-route-clock"), {
     before: done =>
-      import(/* webpackChunkName: "vs-route-triangle" */ "./routes/vs-route-triangle").then(
+      import(/* webpackChunkName: "btl-route-clock" */ "./routes/btl-route-clock").then(
         () => done()
       )
   })
-  .on("/flock", mount("vs-route-flock"), {
+  .on("/triangle", mount("btl-route-triangle"), {
     before: done =>
-      import(/* webpackChunkName: "vs-route-flock" */ "./routes/vs-route-flock").then(
+      import(/* webpackChunkName: "btl-route-triangle" */ "./routes/btl-route-triangle").then(
         () => done()
       )
   })
-  .on("/vue", mount("vs-route-vue"), {
+  .on("/flock", mount("btl-route-flock"), {
     before: done =>
-      import(/* webpackChunkName: "vs-route-vue" */ "./routes/vs-route-vue").then(
+      import(/* webpackChunkName: "btl-route-flock" */ "./routes/btl-route-flock").then(
         () => done()
       )
   })
-  .on("/lit", mount("vs-route-lit"), {
+  .on("/softbody", mount("btl-route-soft-body"), {
     before: done =>
-      import(/* webpackChunkName: "vs-route-lit" */ "./routes/vs-route-lit").then(
+      import(/* webpackChunkName: "btl-route-soft-body" */ "./routes/btl-route-soft-body").then(
+        () => done()
+      )
+  })
+  .on("/vue", mount("btl-route-vue"), {
+    before: done =>
+      import(/* webpackChunkName: "btl-route-vue" */ "./routes/btl-route-vue").then(
+        () => done()
+      )
+  })
+  .on("/lit", mount("btl-route-lit"), {
+    before: done =>
+      import(/* webpackChunkName: "btl-route-lit" */ "./routes/btl-route-lit").then(
         () => done()
       )
   })
