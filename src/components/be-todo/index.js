@@ -1,0 +1,95 @@
+import { cond, T } from "ramda";
+import { create, useReducer } from "../../../packages/ut-component";
+import hyper from "../../renderers/hyper";
+import "../be-text";
+import "../be-button";
+
+const NAME = "be-todo";
+const ADD = "ADD";
+const REMOVE = "REMOVE";
+const CHANGE = "CHANGE";
+const TOGGLE = "TOGGLE";
+
+const hasType = t => (_, { type }) => type === t;
+
+const add = state => ({
+  ...state,
+  todos: [...state.todos, { label: "", checked: false }]
+});
+
+const remove = (state, { payload: { index } }) => ({
+  ...state,
+  todos: [...state.todos.slice(0, index), ...state.todos.slice(index + 1)]
+});
+
+const change = (state, { payload: { index, label } }) => {
+  state.todos[index].label = label;
+
+  return state;
+};
+
+const toggle = (state, { payload: { index } }) => ({
+  ...state,
+  todos: [
+    ...state.todos.slice(0, index),
+    { ...state.todos[index], checked: !state.todos[index].checked },
+    ...state.todos.slice(index + 1)
+  ]
+});
+
+const withLogger = reducer => (state, action) => {
+  const newState = reducer(state, action);
+
+  console.groupCollapsed(`${NAME} - ${action.type.toLowerCase()}`);
+  console.log("action", action);
+  console.log("prevState", state);
+  console.log("nextState", newState);
+  console.groupEnd();
+
+  return newState;
+};
+
+const reducer = withLogger(
+  cond([
+    [hasType(ADD), add],
+    [hasType(REMOVE), remove],
+    [hasType(CHANGE), change],
+    [hasType(TOGGLE), toggle],
+    [T, state => state]
+  ])
+);
+
+create({
+  name: NAME,
+  render: hyper(wire => {
+    const [state, dispatch] = useReducer(reducer, { todos: [] });
+
+    // prettier-ignore
+    return wire(state)`
+      ${state.todos.map((todo, index) => wire(todo)`
+        <div>
+          <input
+            type="checkbox"
+            checked=${todo.checked}
+            onclick=${() => dispatch({
+              type: TOGGLE,
+              payload: { index }
+            })}
+          />
+          <input
+            value=${todo.label}
+            oninput=${({ target: { value }}) => dispatch({
+              type: CHANGE,
+              payload: { index, label: value }
+            })}
+          />
+          <be-button
+            label=${"Remove"}
+            click=${() => dispatch({ type: REMOVE, payload: { index }})}
+          />
+        </div>
+      `)}
+      <be-button click=${() => dispatch({ type: ADD })} label=${"Add"} />
+    `;
+  })
+});

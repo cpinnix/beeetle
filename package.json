@@ -4,7 +4,6 @@
   "description": "Simple Parcel Sandbox",
   "main": "index.html",
   "scripts": {
-    "start": "parcel index.html --open --no-hmr",
     "develop": "webpack-dev-server",
     "build": "webpack --mode=production"
   },
