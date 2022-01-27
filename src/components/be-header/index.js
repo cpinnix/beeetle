@@ -7,7 +7,7 @@ const obj = {};
 create({
   name: "be-header",
   props: {
-    navigate: () => printWarning("be-header", "navigate function is unset")
+    navigate: () => printWarning("be-header", "navigate function is unset"),
   },
   render: hyper(
     (wire, { navigate }) => wire(obj)`
@@ -40,10 +40,7 @@ create({
           <li>
             <a onclick=${() => navigate("/lit")}><be-text text=${"Lit"} /></a>
           </li>
-          <li>
-            <a href="/report" target="_blank"><be-text text=${"Report"} /></a>
-          </li>
         </ul>
       `
-  )
+  ),
 });
